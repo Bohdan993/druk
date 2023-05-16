@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "faqs",
+  "collectionName": "clues",
   "info": {
-    "singularName": "faq",
-    "pluralName": "faqs",
-    "displayName": "Поширені запитання",
+    "singularName": "clue",
+    "pluralName": "clues",
+    "displayName": "Підказки",
     "description": ""
   },
   "options": {
@@ -16,16 +16,15 @@
     }
   },
   "attributes": {
-    "question": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "answer": {
+    "clue": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -34,15 +33,20 @@
       "type": "richtext",
       "required": true
     },
-    "active": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
-      },
-      "type": "boolean",
-      "default": false,
-      "required": true
+      }
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "tabliczya_mists",
+  "info": {
+    "singularName": "tabliczya-mist",
+    "pluralName": "tabliczya-mists",
+    "displayName": "Таблиця міст"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "towns": {
+      "type": "json"
+    }
+  }
+}

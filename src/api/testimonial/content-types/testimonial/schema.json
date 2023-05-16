@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "faqs",
+  "collectionName": "testimonials",
   "info": {
-    "singularName": "faq",
-    "pluralName": "faqs",
-    "displayName": "Поширені запитання",
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Відгуки",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "question": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "answer": {
+    "review": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -34,14 +34,29 @@
       "type": "richtext",
       "required": true
     },
-    "active": {
+    "raiting": {
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       },
-      "type": "boolean",
-      "default": false,
+      "type": "enumeration",
+      "enum": [
+        "Один",
+        "Два",
+        "Три",
+        "Чотири",
+        "П'ять"
+      ],
+      "required": true
+    },
+    "town": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
       "required": true
     }
   }

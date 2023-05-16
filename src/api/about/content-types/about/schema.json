@@ -12,8 +12,42 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "title2": {
+      "type": "richtext"
+    },
     "text": {
-      "type": "string"
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slogan": {
+      "type": "richtext"
+    },
+    "imagetextarea": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.imagetext"
+    },
+    "imagetextarea2title": {
+      "type": "text"
+    },
+    "imagetextarea2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.imagetext"
+    },
+    "text2": {
+      "type": "richtext"
     }
   }
 }
