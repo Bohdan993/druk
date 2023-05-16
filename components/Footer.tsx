@@ -66,7 +66,7 @@ const Footer: FC = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="md:basis-[33.3%] md:px-[25px]">
+                    <div className="md:basis-[33.3%] md:px-[25px] md:pl-[11.068%]">
                         <div>
                             <h3 className="font-bold leading-[1.2] tracking-[0.2em] text-black text-[1.5rem] mb-[28px]">Соцмережі</h3>
                         </div>
@@ -90,7 +90,7 @@ const Footer: FC = () => {
                     </div>
                     <div className="md:basis-[33.3%] md:pl-[25px]">
                         <div>
-                            <h3 className="font-bold leading-[1.2] tracking-[0.2em] text-black text-[1.5rem] mb-[28px]">Конфіденсійність</h3>
+                            <h3 className="font-bold leading-[1.2] tracking-[0.2em] text-black text-[1.5rem] mb-[28px] text-right">Конфіденсійність</h3>
                         </div>
                         <div>
                             <ul>

@@ -41,6 +41,8 @@ const Calculator: FC = () => {
     const calculatorTableState = useAppSelector(selectCalculatorTableState);
     const rotorsState = useAppSelector<RotorType[]>(selectRotorsState);
 
+    console.log(rotorsState)
+
     useEffect(() => {
         if (rotorSliderRef?.current?.splide && orderStepsSliderRef?.current?.splide) {
             rotorSliderRef.current.sync(orderStepsSliderRef?.current!.splide!)

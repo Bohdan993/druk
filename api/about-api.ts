@@ -1,15 +1,13 @@
-import { FileDimensions } from './../types/calculator-table';
 const baseUrl:string = "http://localhost:1337/api";
 
 
-type GetCalculatorTableResponse = Promise<FileDimensions>;
+type GetAboutResponse = Promise<any>;
 
-class CalculatorTableApi {
-
-    async getCalculatorTable() : GetCalculatorTableResponse {
+class AboutApi {
+    async getAbout() : GetAboutResponse {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/price-tavble`, {
+                const res = await fetch(`${baseUrl}/about?&populate[imagetextarea][populate][image][fields][0]=url&populate[imagetextarea][populate][image][fields][1]=width&populate[imagetextarea][populate][image][fields][2]=height&populate[imagetextarea][populate][image][fields][3]=name&populate[imagetextarea2][populate][image][fields][0]=url&populate[imagetextarea2][populate][image][fields][1]=width&populate[imagetextarea2][populate][image][fields][2]=height&populate[imagetextarea2][populate][image][fields][3]=name&populate[image]=image`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,14 +20,14 @@ class CalculatorTableApi {
                     throw new Error(String(res.status));
                 }
         
-                const priceTable = await res.json();
+                const about = await res.json();
         
-                if (!priceTable) {
+                if (!about) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(priceTable?.data?.attributes?.table);
+               resolve(about?.data);
 
             } catch (err) {
                 console.error('[Auth Api]: ', err);
@@ -41,4 +39,4 @@ class CalculatorTableApi {
 
 }
 
-export const calculatorTableApi = new CalculatorTableApi();
+export const aboutApi = new AboutApi();

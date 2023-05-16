@@ -9,20 +9,25 @@ import { getPriceTable } from "@/thunks/calculator-table";
 import { getRotors } from "@/thunks/rotors";
 import type { NextPage } from "next";
 import { useEffect } from "react";
-import { FileDimensions } from './../types/calculator-table'
+import { Faq as FaqType } from './../types/faq'
 import { Rotor as RotorType } from '@/types/rotors';
+import { faqsApi } from "@/api/faqs-api";
+import { aboutApi } from "@/api/about-api";
 
 
 
 
 type HomePageProps = {
-  priceTable: FileDimensions,
+  faqs: FaqType[];
+  about: any
 }
 
-const Home: NextPage<HomePageProps> = () => {
+const Home: NextPage<HomePageProps> = ({faqs, about}) => {
 
   const rotorsState = useAppSelector<RotorType[]>(selectRotorsState);
   const dispatch = useAppDispatch();
+
+  console.log(about);
 
   useEffect(() => {
     const activeRotorsKeys = rotorsState?.map(rotor => {
@@ -40,9 +45,9 @@ const Home: NextPage<HomePageProps> = () => {
     <main>
       <Calculator/>
       <Gallery/>
-      <Faq/>
+      <Faq data={faqs}/>
       <Testimonials/>
-      <About/>
+      <About data={about}/>
     </main>
   )
 }
@@ -52,9 +57,12 @@ export const getServerSideProps =  wrapper.getServerSideProps(
   ({ dispatch }) =>
     async () => {
       await Promise.all([dispatch(getPriceTable()), dispatch(getRotors())]);
-      
+      const faqs = await faqsApi.getFaqs();
+      const about = await aboutApi.getAbout();
       return {
         props: {
+          faqs,
+          about
         },
       };
     }

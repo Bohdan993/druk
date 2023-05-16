@@ -1,6 +1,10 @@
+export interface Faq {
+  id: number
+  attributes: FaqItem
+}
+
 export interface FaqItem {
-    id: number,
-    question: string,
-    answer: string,
-    active: boolean 
+  active: boolean
+  answer: string
+  question: string
 }

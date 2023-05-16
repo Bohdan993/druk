@@ -17,13 +17,16 @@
     "csstype": "^3.1.2",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
+    "html-react-parser": "^3.0.16",
     "next": "13.3.4",
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.0.5",
     "react-tooltip": "^5.11.2",
+    "rodal": "^2.0.1",
     "typescript": "5.0.4"
   },
   "devDependencies": {

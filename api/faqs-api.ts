@@ -1,15 +1,14 @@
-import { FileDimensions } from './../types/calculator-table';
+import { FaqItem } from './../types/faq';
 const baseUrl:string = "http://localhost:1337/api";
 
 
-type GetCalculatorTableResponse = Promise<FileDimensions>;
+type GetFaqsResponse = Promise<FaqItem[]>;
 
-class CalculatorTableApi {
-
-    async getCalculatorTable() : GetCalculatorTableResponse {
+class FaqsApi {
+    async getFaqs() : GetFaqsResponse {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/price-tavble`, {
+                const res = await fetch(`${baseUrl}/faqs?fields[0]=active&fields[1]=answer&fields[2]=question`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,14 +21,14 @@ class CalculatorTableApi {
                     throw new Error(String(res.status));
                 }
         
-                const priceTable = await res.json();
+                const faqs = await res.json();
         
-                if (!priceTable) {
+                if (!faqs) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(priceTable?.data?.attributes?.table);
+               resolve(faqs?.data);
 
             } catch (err) {
                 console.error('[Auth Api]: ', err);
@@ -41,4 +40,4 @@ class CalculatorTableApi {
 
 }
 
-export const calculatorTableApi = new CalculatorTableApi();
+export const faqsApi = new FaqsApi();

@@ -1,40 +1,29 @@
 import {FC, Fragment, useState, MouseEvent} from 'react';
 import FaqItem from './FaqItem';
-import type { FaqItem as FaqItemType} from "../types/faq";
+import type { Faq as FaqType } from "../types/faq";
 
-const data: FaqItemType[] = [
-    {
-        id: 1,
-        question: "Який мінімальний тираж?",
-        answer: "Від 1-єї одиниці.",
-        active: false
-    },
-    {
-        id: 2,
-        question: "Який мінімальний тираж?",
-        answer: "Від 1-єї одиниці.",
-        active: false
-    },
-    {
-        id: 3,
-        question: "Який мінімальний тираж?",
-        answer: "Від 1-єї одиниці.",
-        active: false
-    },
-    {
-        id: 4,
-        question: "Який мінімальний тираж?",
-        answer: "Від 1-єї одиниці.",
-        active: false
-    }
-]
 
-const Faq: FC = () => {
+type FaqProps = {
+    data: FaqType[]
+} 
 
-    const [faqItems, setFaqItems] = useState<FaqItemType[]>(data);
+const Faq: FC<FaqProps> = ({data}) => {
+    const [faqItems, setFaqItems] = useState<FaqType[]>(data);
 
     const handleClick = (id: number, e: MouseEvent<HTMLDivElement>) => {
+        setFaqItems(prev => {
+            const clickedEl: FaqType = prev.find(el => el.id === id)!;
+            if(clickedEl.attributes?.active) {
+                const newEl = {id: clickedEl?.id, attributes: {...clickedEl.attributes, active: false}};
+                const newArr = prev.map(item => item.id === newEl.id ? newEl : item);
+                return newArr;
+            } else {
+                const newEl = {id: clickedEl?.id, attributes: {...clickedEl.attributes, active: true}};
+                const newArr = prev.map(item => item.id === newEl.id ? newEl : {id: item?.id, attributes: {...item.attributes, active: false}});
+                return  newArr;
+            }
 
+        })
     }
 
     return (
@@ -48,9 +37,9 @@ const Faq: FC = () => {
                                 <Fragment key={el?.id}>
                                     <FaqItem
                                           id={el?.id}
-                                          question={el?.question}
-                                          answer={el?.answer} 
-                                          active={el?.active}
+                                          question={el?.attributes?.question}
+                                          answer={el?.attributes?.answer} 
+                                          active={el?.attributes?.active}
                                           handleClick={(id, e) => handleClick(id, e)}
                                     />
                                 </Fragment>

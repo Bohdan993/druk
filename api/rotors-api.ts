@@ -4,18 +4,11 @@ const baseUrl:string = "http://localhost:1337/api";
 
 type GetRotorsResponse = Promise<Rotor[]>;
 
-// type GetContactsRequest = {};
-
-// type GetContactResponse = Promise<Contact>;
-
-// type CreateContactRequest = Contact;
-
-
 class RotorsApi {
     async getRotors() : GetRotorsResponse {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/rotors?sort[0]=order:asc&fields[0]=title&fields[1]=type&populate[rotorpiece][populate][image][fields][0]=url&populate[rotorpiece][populate][image][fields][0]=width&populate[rotorpiece][populate][image][fields][0]=height&populate[rotorpiece][populate][image][fields][0]=name`, {
+                const res = await fetch(`${baseUrl}/rotors?sort[0]=order:asc&fields[0]=title&fields[1]=type&populate[rotorpiece][populate][image][fields][0]=url&populate[rotorpiece][populate][image][fields][1]=width&populate[rotorpiece][populate][image][fields][2]=height&populate[rotorpiece][populate][image][fields][3]=name`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',

@@ -16,8 +16,6 @@ const CalculatorTable: FC = () => {
     const total = getPropByString(calculatorTableState, activeRotorsKeysState);
     const totalContent = typeof total.res === 'number' ? total.res + (total?.additionalRes || 0) : total.res.toString();
 
-    console.log(activeRotorsKeysState)
-
     return (
         <div className="flex lg:flex-col lg:h-full">
             <div className="flex flex-col">
