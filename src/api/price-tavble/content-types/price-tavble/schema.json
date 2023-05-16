@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "price_tavbles",
+  "info": {
+    "singularName": "price-tavble",
+    "pluralName": "price-tavbles",
+    "displayName": "Таблиця цін",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "table": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

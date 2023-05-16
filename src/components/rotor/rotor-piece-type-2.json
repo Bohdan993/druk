@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_rotor_rotor_piece_type_2s",
+  "info": {
+    "displayName": "Rotor-Piece-Type-2",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "key": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    }
+  }
+}

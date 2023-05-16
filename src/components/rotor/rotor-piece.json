@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_rotor_rotor_pieces",
+  "info": {
+    "displayName": "Rotor-Piece",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "key": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
