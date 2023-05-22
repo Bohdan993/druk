@@ -1,17 +1,19 @@
-import {FC, ReactElement, useState} from "react";
+import {FC} from "react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { Options } from "@splidejs/splide";
 // @ts-ignore
 import ReactStars from "react-rating-stars-component";
 import Image from "next/image";
-// @ts-ignore
-import Rodal from 'rodal';
 import locationIcon from "../public/icon-location.svg";
+import googleIcon from "../public/icon-google.svg";
+import fbIcon from "../public/icon-fb-2.svg";
+import plusIcon from "../public/icon-plus.svg";
+import { setShowPopup } from "@/slices/popups";
+import { useAppDispatch } from "@/store";
+import { Testimonial } from './../types/testimonial';
+import { formatDate } from "@/utils/formatDate";
+import type {Raiting} from "../types/testimonial";
 
-
-type IconProps = {
-    icon: string;
-}
 
 const sliderOptions: Options = {
     type: "loop",
@@ -27,238 +29,80 @@ const sliderOptions: Options = {
     height: "393px",
     breakpoints: {
         992: {
-            gap: "-175px"
+            gap: "-160px"
+        },
+        576: {
+            fixedWidth: "300px"
         }
     }
 };
 
 
-const Icon: FC<IconProps> = ({icon}) => {
-    return (
-        <>
-            {icon}
-        </>
-    )
+type TestimonialsProps = {
+    data: Testimonial[]
 }
 
+const raiting: {[key in Raiting]: number} = {
+    "Один": 1,
+    "Два": 2,
+    "Три": 3,
+    "Чотири": 4,
+    "П'ять": 5,
+}
 
-const Testimonials: FC = () => {
+const Testimonials: FC<TestimonialsProps> = ({data}) => {
 
-    const [show, setShow] = useState(false);
-
+    const dispatch = useAppDispatch();
     const handleClick = () => {
-        setShow(true);
-    }
-
-    const handleClose = () => {
-        setShow(false)
+        dispatch(setShowPopup({key: "showTestimonialsPopup", state: true}));
     }
 
     return (
         <div className="testimonials bg-light-green  py-[45px] md:py-[60px] lg:py-[75px]">
-            <h2 className="text-center font-bold leading-[57.6px] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem]">Відгуки клієнтів</h2>
-            <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
+            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] px-[10px]">Відгуки клієнтів</h2>
+            <div className="container m-auto px-[0] sm:px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
                 <div>
                     <Splide hasTrack={false} className="testimonials-carousel" aria-label="Books gallery" options={sliderOptions}>
                         <SplideTrack>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр1</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={<Icon icon="☆"/> as ReactElement}
-                                            filledIcon={<Icon icon="★"/> as ReactElement}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр2</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={"☆"}
-                                            filledIcon={"★"}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр3</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={"☆"}
-                                            filledIcon={"★"}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр4</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={"☆"}
-                                            filledIcon={"★"}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр5</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={"☆"}
-                                            filledIcon={"★"}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] ">
-                                <div className="p-[37px] h-full flex flex-col">
-                                    <div className="flex justify-between items-center mb-[42px]">
-                                        <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">Олександр6</h3>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            activeColor={"#9882AC"}
-                                            color={"#9882AC"}
-                                            edit={false}
-                                            emptyIcon={"☆"}
-                                            filledIcon={"★"}
-                                            value={4} />
-                                    </div>
-                                    <div className="testimonials-text max-w-[208px] mx-auto mb-auto">
-                                        <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem]">
-                                            Дякую за книги! Все добре, прийшли швидше, ніж я очікував, якість друку чудова, переклад від штучного інтелекту теж досить гарний.
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex justify-between items-center">
-                                            <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
-                                            <p className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                                Одеса
-                                            </p>
-                                        </div>
-
-                                        <span className="font-[600] leading-[1.2] tracking-[0.1em]">
-                                            09.02.2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </SplideSlide>
+                            {
+                                data?.map(el => {
+                                    return (
+                                        <SplideSlide className="relative cursor-pointer bg-skin-light rounded-[20px]  shadow-[1px_1px_4px_rgba(38,38,38,0.2)] " key={el?.id}>
+                                            <div className="p-[35px] md:p-[37px] h-full flex flex-col">
+                                                <div className="flex justify-between items-center mb-[42px]">
+                                                    <h3 className="font-[600] text-[1.5rem] leading-[1.2] tracking-[0.1em]">{el?.attributes?.name}</h3>
+                                                    <ReactStars
+                                                        count={5}
+                                                        size={24}
+                                                        activeColor={"#9882AC"}
+                                                        color={"#9882AC"}
+                                                        edit={false}
+                                                        emptyIcon={<>☆</>}
+                                                        filledIcon={<>★</>}
+                                                        value={raiting[el?.attributes?.raiting]} />
+                                                </div>
+                                                <div className="testimonials-text max-w-[208px] mx-auto mb-auto pb-[10px] w-full max-h-[198px]">
+                                                    <p className="leading-[1.2] tracking-[0.1em] text-[1.25rem] h-full overflow-hidden text-ellipsis">
+                                                        {el?.attributes?.review}
+                                                    </p>
+                                                </div>
+                                                <div className="flex justify-between items-center">
+                                                    <div className="flex justify-between items-center">
+                                                        <Image src={locationIcon} alt="Location Icon" className="mr-[7px]"/>
+                                                        <p className="font-[600] leading-[1.2] tracking-[0.1em]">
+                                                            {el?.attributes?.town}
+                                                        </p>
+                                                    </div>
+            
+                                                    <span className="font-[600] leading-[1.2] tracking-[0.1em]">
+                                                        {formatDate(el?.attributes?.createdAt)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </SplideSlide>
+                                    )
+                                })
+                            }
                         </SplideTrack>
                         <div className="splide__arrows">
                             <button className="splide__arrow splide__arrow--prev">  
@@ -291,12 +135,32 @@ const Testimonials: FC = () => {
                     </Splide>
                 </div>
                 <div>
-                    <div>
-
+                    <div className="flex justify-center lg:justify-between items-center lg:px-[50px] flex-wrap md:flex-nowrap">
+                        <div className="testimonials-btn basis-[100%] md:basis-[auto] lg:mx-[10px] md:mx-[6.5px] md:block flex justify-center mb-[13px] md:mb-0 md:ml-0">
+                            <button onClick={handleClick} className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px] ">
+                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center">Залишити відгук</p>
+                                <span className="w-[50px] min-w-[50px] h-[50px] flex bg-natural-green justify-center items-center rounded-[15px]">
+                                    <Image src={plusIcon} alt="Plus Icon"/>
+                                </span>
+                            </button>
+                        </div>
+                        <div className="testimonials-btn basis-[40%] md:basis-[auto] flex justify-end lg:mx-[10px] md:mx-[6.5px] md:block mr-[19px]">
+                            <a href="#" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px]  ">
+                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">Відгуки в Facebook</p>
+                                <span>
+                                    <Image src={fbIcon} alt="Plus Icon" className="rounded-[15px] min-w-[50px]"/>
+                                </span>
+                            </a>
+                        </div>
+                        <div className="testimonials-btn basis-[40%] md:basis-[auto] flex justify-start lg:mx-[10px] md:mx-[6.5px] md:block ml-[19px] md:mr-0">
+                            <a href="#" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px] ">
+                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">Відгуки в Google</p>
+                                <span >
+                                    <Image src={googleIcon} alt="Plus Icon" className="min-w-[50px]" />
+                                </span>
+                            </a>
+                        </div>
                     </div>
-                    <Rodal visible={show} onClose={handleClose}>
-                        <div>Content</div>
-                    </Rodal>
                 </div>
             </div>
 

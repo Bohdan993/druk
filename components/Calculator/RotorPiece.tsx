@@ -1,6 +1,7 @@
 import { degreesToRadians } from '@/utils/degreesToRadians';
 import { useRef, useState, useEffect, FC, MouseEvent} from 'react';
 import { Rotorpiece } from '@/types/rotors';
+import { baseUrl } from '@/constants';
 
 
 type RotorPieceProps = {
@@ -13,7 +14,6 @@ type RotorPieceProps = {
     handleClick: (id: number, e: MouseEvent<SVGGElement>) => void
 }
 
-const baseUrl: string = "http://localhost:1337";
 
 
 const RotorPiece: FC<RotorPieceProps> = ({el, i, slices, cx, cy, r, handleClick}) => {

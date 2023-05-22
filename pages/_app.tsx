@@ -1,26 +1,19 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import { wrapper } from '@/store'
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
+
+import {FC} from 'react';
+import { Provider } from "react-redux";
+import { wrapper } from '@/store';
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
 
 
-function App({ Component, pageProps }: AppProps) {
+const MyApp: FC<AppProps> = ({ Component, ...rest }) => {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
   return (
-    <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-      </Head>
-      <Header/>
-      <Component {...pageProps} />
-      <Footer/>
-    </>
-  )
-}
+    <Provider store={store}>
+        <Component {...pageProps} />
+    </Provider>
+  );
+};
 
-
-export default wrapper.withRedux(App);
+export default MyApp;

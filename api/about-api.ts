@@ -1,17 +1,47 @@
-const baseUrl:string = "http://localhost:1337/api";
+// @ts-ignore
+import qs from 'qs';
+import { IAbout } from './../strapitypes/About';
+import { baseUrlApi as baseUrl} from '@/constants';
 
 
-type GetAboutResponse = Promise<any>;
+
+type GetAboutResponse = Promise<IAbout>;
 
 class AboutApi {
     async getAbout() : GetAboutResponse {
+        const query = qs.stringify( 
+            {
+                populate: {
+                    imagetextarea: {
+                        populate: {
+                            image: {
+                                fields: ["width", "url", "height", "name"]
+                            }
+                        }
+                    },
+                    imagetextarea2: {
+                        populate: {
+                            image: {
+                                fields: ["width", "url", "height", "name"]
+                            }
+                        }
+                    },
+                    image: true
+
+                }
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        );
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/about?&populate[imagetextarea][populate][image][fields][0]=url&populate[imagetextarea][populate][image][fields][1]=width&populate[imagetextarea][populate][image][fields][2]=height&populate[imagetextarea][populate][image][fields][3]=name&populate[imagetextarea2][populate][image][fields][0]=url&populate[imagetextarea2][populate][image][fields][1]=width&populate[imagetextarea2][populate][image][fields][2]=height&populate[imagetextarea2][populate][image][fields][3]=name&populate[image]=image`, {
+                const res = await fetch(`${baseUrl}/about?${query}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
-                    'accept': 'application/json'
+                    'accept': 'application/json',
+                    'cache-control': 'public, s-maxage=1200, stale-while-revalidate=600',
                 },
                 })
         
@@ -30,7 +60,7 @@ class AboutApi {
                resolve(about?.data);
 
             } catch (err) {
-                console.error('[Auth Api]: ', err);
+                console.error('[Api]: ', err);
                 reject(new Error('Internal server error'));
             }
         });

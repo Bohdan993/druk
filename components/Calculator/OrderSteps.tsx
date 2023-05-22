@@ -1,13 +1,14 @@
 
 import {FC, Fragment, useState, forwardRef, Ref, MutableRefObject} from "react";
-import fileExchangeIcon from "../public/file-exchange.svg";
-import sizeIcon from "../public/icon-size.svg";
-import bindingIcon from "../public/icon-binding.svg";
-import paperAmountIcon from "../public/icon-paper-amount.svg";
-import colorsIcon from "../public/icon-colors.svg";
-import otherIcon from "../public/icon-other.svg";
-import mingcuteBookIcon from "../public/icon-mingcute-book.svg";
-import printerIcon from "../public/icon-printer.svg";
+import fileExchangeIcon from "@/public/file-exchange.svg";
+import sizeIcon from "@/public/icon-size.svg";
+import bindingIcon from "@/public/icon-binding.svg";
+import paperAmountIcon from "@/public/icon-paper-amount.svg";
+import colorsIcon from "@/public/icon-colors.svg";
+import otherIcon from "@/public/icon-other.svg";
+import mingcuteBookIcon from "@/public/icon-mingcute-book.svg";
+import printerIcon from "@/public/icon-printer.svg";
+import basketIcon from "@/public/icon-basket.svg";
 import OrderStepItem from "./OrderStepItem";
 import type * as CSS from 'csstype';
 import { Size, useWindowSize } from "@/utils/useWindowSize";
@@ -121,8 +122,6 @@ const sliderOptions: Options = {
 
 
 
-
-
 const OrderSteps: FC<OrderStepsProps> = ({sliderRef}) => {
 
     const [data, setData] = useState<OrderStep[]>(steps);
@@ -153,7 +152,6 @@ const OrderSteps: FC<OrderStepsProps> = ({sliderRef}) => {
                     noArrow={true}
                     positionStrategy={"fixed"}
                     place={"bottom"}
-                    setIsOpen={(val) => true}
                     closeOnEsc={true}
                 />
             </div>

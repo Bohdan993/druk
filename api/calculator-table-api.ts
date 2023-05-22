@@ -1,5 +1,6 @@
 import { FileDimensions } from './../types/calculator-table';
-const baseUrl:string = "http://localhost:1337/api";
+import { baseUrlApi as baseUrl} from '@/constants';
+
 
 
 type GetCalculatorTableResponse = Promise<FileDimensions>;
@@ -32,7 +33,7 @@ class CalculatorTableApi {
                resolve(priceTable?.data?.attributes?.table);
 
             } catch (err) {
-                console.error('[Auth Api]: ', err);
+                console.error('[Api]: ', err);
                 reject(new Error('Internal server error'));
             }
         });

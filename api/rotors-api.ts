@@ -1,14 +1,35 @@
+// @ts-ignore
+import qs from 'qs';
 import { Rotor } from './../types/rotors';
-const baseUrl:string = "http://localhost:1337/api";
+import { baseUrlApi as baseUrl} from '@/constants';
 
 
 type GetRotorsResponse = Promise<Rotor[]>;
 
 class RotorsApi {
     async getRotors() : GetRotorsResponse {
+        const query = qs.stringify( 
+            {   
+                sort: ["order:asc"],
+                populate: {
+                    rotorpiece: {
+                        populate: {
+                            image: {
+                                fields: ["url", "width", "height", "name"]
+                            }
+                        }
+                    }
+                },
+                fields: ["title", "type"]
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        );
+
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/rotors?sort[0]=order:asc&fields[0]=title&fields[1]=type&populate[rotorpiece][populate][image][fields][0]=url&populate[rotorpiece][populate][image][fields][1]=width&populate[rotorpiece][populate][image][fields][2]=height&populate[rotorpiece][populate][image][fields][3]=name`, {
+                const res = await fetch(`${baseUrl}/rotors?${query}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,7 +52,7 @@ class RotorsApi {
                resolve(rotors?.data);
 
             } catch (err) {
-                console.error('[Auth Api]: ', err);
+                console.error('[Api]: ', err);
                 reject(new Error('Internal server error'));
             }
         });

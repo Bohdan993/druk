@@ -1,7 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Rotor from './Rotor';
 import RotorType2 from './RotorType2';
 import { Rotor as RotorType } from '@/types/rotors';
+import { selectRotorsState, setActiveRotorsKeys } from "@/slices/rotors";
+import { useAppDispatch, useAppSelector } from "@/store";
 
 
 
@@ -16,6 +18,21 @@ type RotorWrapperProps = {
 }
 
 const RotorWrapper:FC<RotorWrapperProps> = ({cx, cy, r, w, h, type, data}) => {
+
+    const rotorsState = useAppSelector<RotorType[]>(selectRotorsState);
+    const dispatch = useAppDispatch();
+  
+    useEffect(() => {
+      const activeRotorsKeys = rotorsState?.map(rotor => {
+          return rotor.attributes.rotorpiece.map(rp => {
+            if(rp?.active) {
+              return rp?.key;
+            }
+            return '';
+          }).filter(Boolean);
+      }).filter(Boolean).flat();
+      dispatch(setActiveRotorsKeys(activeRotorsKeys));
+    }, [dispatch, rotorsState]);
 
     if(type === 'singleselect2') {
         return (

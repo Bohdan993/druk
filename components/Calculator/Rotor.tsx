@@ -1,6 +1,6 @@
 import {FC, Fragment, MouseEvent} from 'react';
 import RotorPiece from './RotorPiece';
-import {RotorProps, Rotorpiece} from "../types/rotors";
+import {RotorProps} from "@/types/rotors";
 import { updateRotor } from '@/slices/rotors';
 import { useAppDispatch } from '@/store';
 

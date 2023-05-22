@@ -1,7 +1,7 @@
 import { describeArc } from '@/utils/describeArc';
 import {FC, Fragment, useState, useEffect, MouseEvent, useRef} from 'react';
 import RotorPieceType2 from './RotorPieceType2';
-import {RotorProps, Rotorpiece} from "../types/rotors";
+import {RotorProps, Rotorpiece} from "@/types/rotors";
 import { updateRotor } from '@/slices/rotors';
 import { useAppDispatch } from '@/store';
 

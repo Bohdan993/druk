@@ -1,10 +1,10 @@
 export interface Faq {
-  id: number
-  attributes: FaqItem
+  readonly id: number
+  readonly attributes: FaqItem
 }
 
 export interface FaqItem {
   active: boolean
-  answer: string
-  question: string
+  readonly answer: string
+  readonly question: string
 }

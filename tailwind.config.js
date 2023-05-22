@@ -21,16 +21,20 @@ module.exports = {
       'fiolet': '#9882AC',
       'skin-light': '#FBF5E9',
       'black': '#262626',
+      'black-2': "#111111",
       'white-glass': 'rgba(255,255,255,0.3)',
       'light-green': '#C6DD89',
       'gray': '#D9D9D9',
       'skin-gr-1': '#E0C89A',
       'skin-gr-2': '#FFF0D3',
-      'transparent': 'transparent'
+      'transparent': 'transparent',
+      'white': "#FFFFFF",
+      'fail': "#FF3030"
     },
     fontFamily: {
       alumni: "Alumni Sans, sans-serif",
-      montserrat: "Montserrat, sans-serif"
+      montserrat: "Montserrat, sans-serif",
+      roboto: "Roboto Condensed, sans-serif"
     }, 
     extend: {      
       backgroundImage: {

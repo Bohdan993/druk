@@ -1,6 +1,6 @@
 import {FC, Fragment, useState, MouseEvent} from 'react';
 import FaqItem from './FaqItem';
-import type { Faq as FaqType } from "../types/faq";
+import type { Faq as FaqType } from "@/types/faq";
 
 
 type FaqProps = {
@@ -28,7 +28,7 @@ const Faq: FC<FaqProps> = ({data}) => {
 
     return (
         <div className="faq bg-skin-dark  py-[45px] md:py-[60px] lg:py-[75px]">
-            <h2 className="text-center font-bold leading-[57.6px] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[50px]">Поширені запитання</h2>
+            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[50px] px-[10px]">Поширені запитання</h2>
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
                 <div>
                     {

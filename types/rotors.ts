@@ -34,7 +34,6 @@ export interface Rotor {
     name: string
   }
 
-
   export interface RotorProps {
     cx: number
     cy: number
