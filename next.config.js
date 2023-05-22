@@ -4,13 +4,19 @@ module.exports = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
+      // {
+      //   protocol: 'http',
+      //   hostname: 'localhost',
+      //   port: '1337',
+      //   pathname: '/uploads/**'
+      // },
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        protocol: 'https',
+        hostname: 'druk-back.onrender.com',
+        port: '',
         pathname: '/uploads/**'
       },
-    ]
+    ],
   },
 }
 

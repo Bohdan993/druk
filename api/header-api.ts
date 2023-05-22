@@ -39,20 +39,20 @@ class HeaderApi {
                         'accept': 'application/json',
                         'cache-control': 'public, s-maxage=1200, stale-while-revalidate=600',
                     },
-                })
-        
+                });
+
                 if(!res.ok && res.status!==200)
                 {
                     throw new Error(String(res.status));
                 }
         
                 const header = await res.json();
-        
+
                 if (!header) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
-
+                
                resolve(header?.data);
 
             } catch (err) {
