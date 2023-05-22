@@ -48,6 +48,13 @@
     },
     "text2": {
       "type": "richtext"
+    },
+    "imagetextareatitle": {
+      "type": "text"
+    },
+    "sectionid": {
+      "type": "string",
+      "required": true
     }
   }
 }

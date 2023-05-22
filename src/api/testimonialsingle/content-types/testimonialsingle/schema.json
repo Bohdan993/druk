@@ -1,10 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "menus",
+  "kind": "singleType",
+  "collectionName": "testimonialsingles",
   "info": {
-    "singularName": "menu",
-    "pluralName": "menus",
-    "displayName": "Меню",
+    "singularName": "testimonialsingle",
+    "pluralName": "testimonialsingles",
+    "displayName": "Відгуки",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "name": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,10 +25,10 @@
       "type": "string",
       "required": true
     },
-    "link": {
+    "sectionid": {
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "type": "string",

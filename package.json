@@ -9,7 +9,8 @@
     "build": "strapi build",
     "strapi": "strapi",
     "production": "cross-env NODE_ENV=production npm run build",
-    "start:prod": "cross-env NODE_ENV=production npm run start"
+    "start:prod": "cross-env NODE_ENV=production npm run start",
+    "types": "t4s --out ../front/strapitypes"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.10.2",
@@ -29,5 +30,8 @@
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@oak-digital/types-4-strapi-2": "^0.5.5"
+  }
 }

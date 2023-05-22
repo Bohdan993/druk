@@ -1,7 +1,7 @@
 {
   "collectionName": "components_common_contact_items",
   "info": {
-    "displayName": "contact-item",
+    "displayName": "Елемент контакт",
     "description": ""
   },
   "options": {},
@@ -14,11 +14,12 @@
       "type": "string"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
