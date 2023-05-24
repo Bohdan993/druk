@@ -19,10 +19,10 @@ const OrderButtons: FC = () => {
     }
     return (
         <div>
-            <div className="flex justify-center items-center flex-col-reverse md:flex-row">
-                <button onClick={handleClick} className="relative text-center md:text-left h-[167px] bg-white-glass border-[1px] border-natural-green order-button md:pl-[10px] md:pr-[87px] md:mr-[17.5%]">
+            <div className="flex lg:justify-center items-center md:items-stretch lg:items-center flex-col-reverse md:flex-row">
+                <button onClick={handleClick} className="relative text-center md:text-left h-[167px] md:h-auto lg:h-[167px] bg-white-glass border-[1px] border-natural-green order-button lg:pl-[10px] lg:pr-[87px] lg:mr-[17.5%] md:mr-[30px] md:flex lg:block items-end justify-center md:pb-[26px] lg:pb-0 md:pt-[115px] lg:pt-0">
                     <div>
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[#323843] md:max-w-[75px]">Замовити книгу зі своїм файлом</p>
+                        <p className="text-[1.25rem] md:text-[1rem] font-bold leading-[1.2] tracking-[0.2em] text-[#323843] lg:max-w-[75px] text-center lg:text-left">Замовити книгу зі своїм файлом</p>
                     </div>
                     <div className="absolute rotor flex justify-center items-center">
                         <div className="relative z-10 icon flex justify-center items-center">
@@ -30,14 +30,14 @@ const OrderButtons: FC = () => {
                         </div>
                     </div>
                 </button>
-                <button onClick={handleClick2} className="relative text-center md:text-right h-[167px] bg-white-glass border-[1px] border-natural-green order-button md:pr-[10px] md:pl-[87px] md:ml-[17.5%]">
+                <button onClick={handleClick2} className="relative text-center md:text-right h-[167px] md:h-auto lg:h-[167px] bg-white-glass border-[1px] border-natural-green order-button lg:pr-[10px] lg:pl-[87px] lg:ml-[17.5%] md:flex lg:block items-end justify-center md:pb-[26px] lg:pb-0 md:pt-[115px] lg:pt-0">
                     <div className="absolute rotor flex justify-center items-center">
                         <div className="relative z-10 icon flex justify-center items-center">
                             <Image src={searchBookIcon} alt="Search Book"/>
                         </div>
                     </div>
                     <div>
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[#323843] md:max-w-[75px]">Замовити пошук книги</p>
+                        <p className="text-[1.25rem] md:text-[1rem] font-bold leading-[1.2] tracking-[0.2em] text-[#323843] lg:max-w-[75px] text-center lg:text-right">Замовити пошук книги</p>
                     </div>
                 </button>
             </div>

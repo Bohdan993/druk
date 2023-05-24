@@ -1,11 +1,11 @@
 import { useAppDispatch } from "@/store";
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
 import Select, { components, DropdownIndicatorProps,OptionProps} from 'react-select';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { testimonialsApi } from "@/api/testimonials-api";
 import { setShowPopup } from "@/slices/popups";
+import { Dropzone } from "../Helpers/Dropzone";
 
 
 
@@ -31,9 +31,11 @@ type OptionType = {
 
 const schema = yup.object({
     name: yup.string()
-    .required("Це поле обов'язкове для заповнення")
-    .min(3, "Поле має містити мінімум 3 символа")
-    .max(20, "Поле має містити максимум 20 символів")
+        .required("Це поле обов'язкове для заповнення")
+        .min(3, "Поле має містити мінімум 3 символа")
+        .max(20, "Поле має містити максимум 20 символів"),
+    phonenum: yup.string(),
+    url: yup.string()
   }).required();
 
 const phoneOpts: OptionType[] = [
@@ -74,10 +76,11 @@ const DropdownIndicator = (
 
 
   const Option = (props: OptionProps<OptionType>) => {
-    // console.log(props);
+
     return (
-        <div className={props?.isSelected ? "selected-option": ""}>
-            <components.Option {...props} />
+        <div className={props?.isSelected ? "selected-option flex items-center px-[10px] py-[6px]": "flex items-center px-[10px] py-[6px]"}>
+            <div className="w-[15px] h-[15px] border-black border-[2px] mr-[10px] min-w-[15px] flex justify-center items-center text-[12px] leading-[15px]">{props?.isSelected ? '✔': ''}</div>
+            <components.Option {...props} className="p-[unset!important]" />
         </div>
         
     );
@@ -87,11 +90,17 @@ const DropdownIndicator = (
 const OrderWithFilePopup: FC<any> = (props) => {
 
     const dispatch = useAppDispatch();
+    const [file, setFile] = useState('');
 
     const { register, setValue, watch, handleSubmit, formState: { errors, isSubmitting } } = useForm<Inputs>(
         {   
             mode: "onBlur",
-            resolver: yupResolver(schema)
+            resolver: yupResolver(schema),
+            defaultValues: {
+                "file-radio": 'Файл',
+                bounding: "Тверда",
+                color: "ЧБ"
+            }
         }
     );
 
@@ -99,12 +108,14 @@ const OrderWithFilePopup: FC<any> = (props) => {
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
         try {
+            const formData = new FormData();
+            console.log(data);
             // await testimonialsApi.postTestimonial({
             //     name: data?.name,
             //     review: data?.review,
             //     town: data?.town,
             // })
-            dispatch(setShowPopup({key: "showTestimonialsThanksPopup", state: true}));
+            dispatch(setShowPopup({key: "showOrderThanksPopup", state: true}));
         } catch(err) {
 
         }
@@ -115,91 +126,105 @@ const OrderWithFilePopup: FC<any> = (props) => {
         setValue("phoneoperator", phoneOpts[0]["value"]);
     }, [setValue]);
 
+
     return (    
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="pb-[15px] relative">
                 <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-name`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Ваше ім'я"}</label>
+                    <label htmlFor={`${props?.id}-name`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Ваше ім'я"}</label>
                     <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть ваше ім'я" id={`${props?.id}-name`} {...register("name")} />
                 </div>
                 <p className="text-danger absolute right-0 bottom-0">{errors?.name?.message}</p>
             </div>
-            <div className="pb-[15px] relative">
+            <div className="pb-[35px] relative">
                 <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-phonenum`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Телефон"}</label>
-                    <div>
+                    <label htmlFor={`${props?.id}-phonenum`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Телефон"}</label>
+                    <div className="flex items-center">
                         <Select<OptionType>
                             options={phoneOpts} 
                             defaultValue={phoneOpts[0]}
                             onChange={(selectOptionType) => setValue("phoneoperator", selectOptionType?.["value"] || "")}
-                            className="popup-select order-popup-select"
+                            className="popup-select order-popup-select mr-[5px]"
                             classNamePrefix="popup"
                             components={{ DropdownIndicator }}
                             isSearchable={false}
-                    />
+                            isClearable={false}
+                            closeMenuOnSelect={false}
+                            closeMenuOnScroll={false}
+                        />
+                        <input className="input font-[600] leading-[1.2] py-[7.5px] px-[10px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[94px]" type="tel" placeholder="+380970000000" id={`${props?.id}-phonenum`} {...register("phonenum")} />
                     </div>
-                    <input className="input font-[600] leading-[1.2] py-[7.5px] px-[10px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[94px]" type="tel" placeholder="+380970000000" id={`${props?.id}-phonenum`} {...register("phonenum")} />
+                    
                 </div>
                 <p className="text-danger absolute right-0 bottom-0">{errors?.phonenum?.message}</p>
             </div>
             <div className="pb-[15px] relative">
                 <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-bookname`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Назва книги"}</label>
+                    <label htmlFor={`${props?.id}-bookname`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Назва книги"}</label>
                     <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть повну назву" id={`${props?.id}-bookname`} {...register("bookname")} />
                 </div>
                 <p className="text-danger absolute right-0 bottom-0">{errors?.bookname?.message}</p>
             </div>
-            <div className="pb-[15px] relative">
+            <div className="pb-[35px] relative">
                 <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-bookauthor`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Автор книги"}</label>
+                    <label htmlFor={`${props?.id}-bookauthor`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Автор книги"}</label>
                     <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть ФІО" id={`${props?.id}-bookauthor`} {...register("bookauthor")} />
                 </div>
                 <p className="text-danger absolute right-0 bottom-0">{errors?.bookauthor?.message}</p>
             </div>
             <div>
-                <fieldset>
+                <fieldset className="mb-[35px]">
                     <div>
-                        <div>
-                            <input type="radio" id={`${props?.id}-file`} checked value="Файл" {...register("file-radio")} />
-                            <label htmlFor={`${props?.id}-bounding1`}>
-
+                        <div className="flex items-center mb-[15px]">
+                            
+                            <input type="radio" id={`${props?.id}-file`} value="Файл" {...register("file-radio")} className="mr-[12px]"/>
+                            <label htmlFor={`${props?.id}-file`} className="block w-full">
+                                <Dropzone isDisabled={watchFileRadio !== "Файл"} setFile={setFile}/>
                             </label>
                         </div>
-                        <div>
-                            <input type="radio" id={`${props?.id}-file2`} value="Посилання" {...register("file-radio")} />
-                            <label htmlFor={`${props?.id}-file2`}>
-                                Посилання
-                                <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть посилання" id={`${props?.id}-url`} {...register("url")} />
-                            </label>
+                        <div className="flex items-center">
+                            <input type="radio" id={`${props?.id}-file2`} value="Посилання" {...register("file-radio")} className="mr-[22px]"/>
+                            <div>
+                                <label htmlFor={`${props?.id}-file2`} className="flex items-center w-full cursor-pointer">
+                                    <p className="bais-[30%] mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">Посилання</p>
+                                    <input className={`input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px] ${watchFileRadio !== "Посилання" ? "bg-gray": ""}`} disabled={watchFileRadio !== "Посилання"} type="text" placeholder="Введіть посилання" id={`${props?.id}-url`} {...register("url")} />
+                                </label>
+                                <p className="text-danger absolute right-0 bottom-0">{errors?.url?.message}</p>
+                            </div>
+                            
                         </div>
                     </div>
                 </fieldset>
             </div>
             <div>
-                <fieldset>
-                    <legend className="font-bold text-[1.125] leading-[1.2] tracking-[0.2em]">
+                <fieldset className="mb-[35px]">
+                    <legend className="font-bold text-[1.125] leading-[1.2] tracking-[0.2em] mb-[15px]">
                         Параметри книги:
                     </legend>
-                    <div className="flex justify-between">
-                        <p>Палітурка</p>
-                        <div>
-                            <input type="radio" id={`${props?.id}-bounding1`} checked value="Тверда" {...register("bounding")} />
-                            <label htmlFor={`${props?.id}-bounding1`}>Тверда</label>
-                        </div>
-                        <div>
-                            <input type="radio" id={`${props?.id}-bounding2`} value="М'яка" {...register("bounding")}/>
-                            <label htmlFor={`${props?.id}-bounding2`}>{"М'яка"}</label>
+                    <div className="flex justify-between mb-[12px]">
+                        <p className="bais-[30%] mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">Палітурка</p>
+                        <div className="flex justify-between basis-[60%]">
+                            <div className="flex items-center">
+                                <input type="radio" id={`${props?.id}-bounding1`} value="Тверда" {...register("bounding")} className="mr-[10px]"/>
+                                <label htmlFor={`${props?.id}-bounding1`} className="cursor-pointer">Тверда</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input type="radio" id={`${props?.id}-bounding2`} value="М'яка" {...register("bounding")} className="mr-[10px]"/>
+                                <label htmlFor={`${props?.id}-bounding2`} className="cursor-pointer">{"М'яка"}</label>
+                            </div>
                         </div>
                     </div>
                     <div className="flex justify-between">
-                        <p>Колір блоку</p>
-                        <div>
-                            <input type="radio" id={`${props?.id}-color1`} checked value="ЧБ" {...register("color")}/>
-                            <label htmlFor={`${props?.id}-color1`}>ЧБ</label>
-                        </div>
-                        <div>
-                            <input type="radio" id={`${props?.id}-color2`} value="Колір" {...register("color")} />
-                            <label htmlFor={`${props?.id}-color2`}>{"Колір"}</label>
+                        <p className="bais-[30%] mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">Колір блоку</p>
+                        <div className="flex justify-between  basis-[60%]">
+                            <div className="flex items-center">
+                                <input type="radio" id={`${props?.id}-color1`} value="ЧБ" {...register("color")} className="mr-[10px]"/>
+                                <label htmlFor={`${props?.id}-color1`} className="cursor-pointer">ЧБ</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input type="radio" id={`${props?.id}-color2`} value="Колір" {...register("color")} className="mr-[10px]" />
+                                <label htmlFor={`${props?.id}-color2`} className="cursor-pointer">{"Колір"}</label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -214,15 +239,14 @@ const OrderWithFilePopup: FC<any> = (props) => {
                             onChange={(selectOptionType) => setValue("advancedservices", (selectOptionType as any)["value"] || "")}
                             className="popup-select order-popup-select-2"
                             classNamePrefix="popup"
-                            isSearchable={false}
                             placeholder={"Оберіть послуги"}
                             components={{ DropdownIndicator, Option }}
+                            isSearchable={false}
                             isClearable={false}
                             hideSelectedOptions={false}
                             controlShouldRenderValue={false}
                             closeMenuOnSelect={false}
                             closeMenuOnScroll={false}
-                            menuIsOpen={true}
                             
                     />
                     </div>
@@ -231,7 +255,7 @@ const OrderWithFilePopup: FC<any> = (props) => {
             </div>
             <div className="pb-[25px] relative">
                 <div>
-                    <label className="font-bold text-[1.125] leading-[1.2] tracking-[0.2em]" htmlFor="">Додайте коментар:</label>
+                    <label className="font-bold text-[1.125rem] leading-[1.2] tracking-[0.2em] mb-[15px] block" htmlFor="">Додайте коментар:</label>
                     <textarea rows={2} className="textarea bg-white-glass resize-none w-full border-fiolet border-[1px] rounded-[10px] px-[20px] py-[10px] outline-none font-[500] line-height-[1.2]"
                         {...register("comment")}
                     >

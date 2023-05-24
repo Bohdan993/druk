@@ -18,7 +18,9 @@ import Footer from '@/components/Footer';
 import { testimonialsApi } from "@/api/testimonials-api";
 import { headerApi } from "@/api/header-api";
 import { IHeader } from './../strapitypes/Header';
-
+import { IGallerysingle } from './../strapitypes/Gallerysingle';
+import { IGallery } from './../strapitypes/Gallery';
+import { galleryApi } from "@/api/gallery-api";
 
 
 
@@ -32,18 +34,20 @@ type HomePageProps = {
   footer: any;
   testimonials: any;
   header:IHeader;
+  gallery: IGallery[],
+  gallerySingle:IGallerysingle
 }
 
-const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header}) => {
+const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle}) => {
 
-  console.log(header);
+  // console.log(header);
 
   return (
     <>
       <Header data={header}/>
       <main>
         <Calculator/>
-        <Gallery/>
+        <Gallery data={gallery} dataSingle={gallerySingle}/>
         <Faq data={faqs}/>
         <Testimonials data={testimonials}/>
         <About data={about}/>
@@ -62,12 +66,14 @@ export const getServerSideProps =  wrapper.getServerSideProps(
       //   'Cache-Control',
       //   'public, s-maxage=10, stale-while-revalidate=59',
       // );
-      const [faqs, about, footer, testimonials, header]  = await Promise.all([
+      const [faqs, about, footer, testimonials, header, gallery, gallerySingle]  = await Promise.all([
         faqsApi.getFaqs(), 
         aboutApi.getAbout(), 
         footerApi.getFooter(),
         testimonialsApi.getTestimonials(),
         headerApi.getHeader(),
+        galleryApi.getGallery(),
+        galleryApi.getGallerySingle(),
         dispatch(getPriceTable()), 
         dispatch(getRotors()),
         dispatch(getTowns())
@@ -80,7 +86,9 @@ export const getServerSideProps =  wrapper.getServerSideProps(
           about,
           footer,
           testimonials,
-          header
+          header,
+          gallery,
+          gallerySingle
         },
       };
     }

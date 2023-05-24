@@ -1,16 +1,31 @@
-import { FaqItem } from './../types/faq';
+// @ts-ignore
+import qs from 'qs';
+import { IGallerysingle } from './../strapitypes/Gallerysingle';
+import { IGallery } from './../strapitypes/Gallery';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 
-type GetFaqsResponse = Promise<FaqItem[]>;
-type GetFaqsSingleResponse = Promise<any>;
 
-class FaqsApi {
-    async getFaqs() : GetFaqsResponse {
-        const query = 'fields[0]=active&fields[1]=answer&fields[2]=question';
+
+type GetGalleryResponse = Promise<IGallery[]>;
+type GetGallerySingleResponse = Promise<IGallerysingle>;
+
+class GalleryApi {
+    async getGallery() : GetGalleryResponse {
+        const query = qs.stringify( 
+            {
+                populate: {
+                    image: true
+                }
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        );
+
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/faqs?${query}`, {
+                const res = await fetch(`${baseUrl}/galleries?${query}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,14 +38,14 @@ class FaqsApi {
                     throw new Error(String(res.status));
                 }
         
-                const faqs = await res.json();
+                const gallery = await res.json();
         
-                if (!faqs) {
+                if (!gallery) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(faqs?.data);
+               resolve(gallery?.data);
 
             } catch (err) {
                 console.error('[Api]: ', err);
@@ -40,10 +55,10 @@ class FaqsApi {
 
     }
 
-    async getFaqsSingle() : GetFaqsSingleResponse  {
+    async getGallerySingle() : GetGallerySingleResponse  {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/faqs`, {
+                const res = await fetch(`${baseUrl}/gallerysingle`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,14 +71,14 @@ class FaqsApi {
                     throw new Error(String(res.status));
                 }
         
-                const faqs = await res.json();
+                const gallery = await res.json();
         
-                if (!faqs) {
+                if (!gallery) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(faqs?.data);
+               resolve(gallery?.data);
 
             } catch (err) {
                 console.error('[Api]: ', err);
@@ -75,4 +90,4 @@ class FaqsApi {
 
 }
 
-export const faqsApi = new FaqsApi();
+export const galleryApi = new GalleryApi();

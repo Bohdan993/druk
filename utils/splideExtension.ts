@@ -5,15 +5,11 @@ export function MyExtension( Splide: SplideType, Components: Components ) {
      * Optional. Called when the component is mounted.
      */
     function mount() {
-      console.log( 'Hello, Splide!' );
-
       Splide.on( 'move', onMove );
       onMove(Splide?.index);
     }
     
-
     function onMove (newIndex: number) {
-        console.log('move');
         const currentSlide = Components?.Slides?.getAt(newIndex)?.slide?.dataset?.class;
         Splide.root.dataset.currentSlide = currentSlide || "empty";
     }

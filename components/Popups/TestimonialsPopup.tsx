@@ -2,7 +2,7 @@ import { selectTownsState } from "@/slices/towns";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {FC, useEffect, useMemo} from "react";
 import {Towns} from "@/types/towns";
-import Select from "react-select";
+import Select, { components, DropdownIndicatorProps} from 'react-select';
 // @ts-ignore
 import ReactStars from "react-rating-stars-component";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -46,6 +46,26 @@ const raiting: {[key: number]: Raiting} = {
     4: "Чотири",
     5: "П'ять"
 }
+
+const DropdownIndicator = (
+    props: DropdownIndicatorProps<Option>
+  ) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="27"
+            fill="none"
+            viewBox="0 0 15 27"
+            >
+            <path
+                d="M2.972 1.015L14.62 12.54c.138.137.236.285.293.446.058.16.087.331.087.514s-.029.354-.087.514c-.057.16-.155.31-.293.446L2.972 26.02c-.322.32-.725.48-1.21.48-.483 0-.898-.172-1.244-.515-.345-.343-.518-.743-.518-1.2 0-.457.173-.858.518-1.2L10.68 13.5.518 3.416a1.601 1.601 0 01-.483-1.183c0-.47.172-.875.518-1.218C.899.672 1.302.5 1.763.5c.46 0 .864.172 1.21.515z"
+            ></path>
+        </svg>
+      </components.DropdownIndicator>
+    );
+  };
 
 
 const TestimonialsPopup: FC<any> = (props) => {
@@ -96,9 +116,12 @@ const TestimonialsPopup: FC<any> = (props) => {
                         options={selectOptions} 
                         defaultValue={selectOptions[0]}
                         onChange={(selectOption) => setValue("town", selectOption?.["value"] || "")}
-                        className="popup-select"
+                        className="popup-select testimonials-popup-select"
                         classNamePrefix="popup"
+                        components={{DropdownIndicator}}
                         isSearchable={false}
+                        isClearable={false}
+                        // menuIsOpen={true}
                     />
                 </div>
                 <ReactStars
@@ -117,14 +140,14 @@ const TestimonialsPopup: FC<any> = (props) => {
                     <label htmlFor={`${props?.id}-name`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Ваше ім'я"}</label>
                     <input className="input font-[600] leading-[1] py-[8.5px] px-[15px] text-black border-natural-green border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть ваше ім'я" id={`${props?.id}-name`} {...register("name")} />
                 </div>
-                <p className="text-danger absolute left-0 bottom-[3px]">{errors?.name?.message}</p>
+                <p className="text-danger absolute left-0 bottom-[10px]">{errors?.name?.message}</p>
             </div>
-            <div className="pb-[25px] relative">
+            <div className="pb-[25px] relative testimonials-review-container">
                 <textarea rows={6} placeholder="Напишіть тут свій чесний відгук та пропозиції, ваша думка дуже важлива та цінна для нас." className="textarea resize-none w-full border-natural-green border-[1px] rounded-[10px] px-[20px] pt-[30px] pb-[45px] outline-none font-[500]"
                     {...register("review")}
                 >
                 </textarea>
-                <p className="text-danger absolute left-0 bottom-[3px]">{errors?.review?.message}</p>
+                <p className="text-danger absolute left-0 bottom-[10px]">{errors?.review?.message}</p>
             </div>
             <div className="w-full flex justify-center">
                 <button disabled={isSubmitting} type="submit" className="popup-btn-1">Опублікувати</button>

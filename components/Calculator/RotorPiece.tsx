@@ -38,11 +38,12 @@ const RotorPiece: FC<RotorPieceProps> = ({el, i, slices, cx, cy, r, handleClick}
         setImageRect(imageRef!.current!.getBoundingClientRect());
     }, []);
 
+
     return (
             <g onClick={(e) => handleClick(el?.id, e)}>
                 <path className={`${el?.active? "fill-natural-green": "fill-skin-dark"} transition-all duration-50 ease-in`} d={'M' + cx + ',' + cy + ' L' + fromCoordX + ',' + fromCoordY + ' A' + r + " " + r + ' 0 0 1 ' + toCoordX + ' ' + toCoordY + 'z'}></path>
                 <path strokeOpacity="1" filter={`${el?.active ? 'url(#shadow) url(#shadow2)': 'url(#shadow3)'}`}  d={'M' + cx + ',' + cy + ' L' + fromCoordX + ',' + fromCoordY + ' A' + r + " " + r + ' 0 0 1 ' + toCoordX + ' ' + toCoordY + 'z'}></path>
-                <image ref={imageRef} href={baseUrl + el?.image?.data?.attributes?.url} className="defaultImage" style={{transform: `translate(${toCoordX2 - imageRect?.width!/2}px, ${toCoordY2 - imageRect?.height!/2}px)`}}></image>
+                <image ref={imageRef} href={baseUrl + el?.image?.data?.attributes?.url} className={`defaultImage ${imageRect?.width && imageRect?.height ? "opacity-1" : "opacity-0" }`} style={{transform: `translate(${toCoordX2 - imageRect?.width!/2}px, ${toCoordY2 - imageRect?.height!/2}px)`}}></image>
             </g>
     );
     

@@ -2,9 +2,9 @@ import {FC} from 'react';
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { Options } from '@splidejs/splide';
 import Image from 'next/image';
-import book2Image from '../public/book-2.png';
-import book3Image from '../public/book-3.png';
-
+import { IGallerysingle } from '../strapitypes/Gallerysingle';
+import { IGallery } from '../strapitypes/Gallery';
+import { baseUrl } from '@/constants';
 
 
 const sliderOptions: Options = {
@@ -19,68 +19,47 @@ const sliderOptions: Options = {
     fixedWidth: "210px",
     keyboard: 'global',
     breakpoints: {
-        992: {
+        991: {
             perPage: 5,
             gap: "-80px"
         },
-        768: {
-            perPage: 3
+        767: {
+            perPage: 3,
         }
     }
     
 };
 
-const Gallery: FC = () => {
+
+type GalleryProps = {
+    data: IGallery[],
+    dataSingle: IGallerysingle
+}
+
+const Gallery: FC<GalleryProps> = ({data, dataSingle}) => {
+
     return (
-        <div className="gallery bg-skin-light  py-[45px] md:py-[60px] lg:py-[75px]">
-            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[40px] px-[10px]">Галерея</h2>
+        <div className="gallery bg-skin-light  py-[45px] md:py-[60px] lg:py-[75px]" id={dataSingle?.attributes?.sectionid || "#"}>
+            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[40px] px-[10px]">{dataSingle?.attributes?.title}</h2>
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
             <Splide className="books-gallery min-h-[470px]" aria-label="Books gallery" options={sliderOptions} hasTrack={false}>
                 <SplideTrack>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book2Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book2Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book2Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto"src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto"src={book2Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book2Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
-                    <SplideSlide className="relative cursor-pointer">
-                        <Image className="mx-auto" src={book3Image} alt="Book" />
-                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2 max-w-[130px] mx-auto mt-[35px]">Назва книги та її розмір</p>
-                    </SplideSlide>
+                    {
+                        data?.map(el => {
+                            console.log(el);
+                            return(
+                                <SplideSlide className="relative cursor-pointer" key={el?.id}>
+                                    <div>
+                                        <div className="books-gallery-image-container">
+                                            <Image className="mx-auto" src={baseUrl + el?.attributes?.image?.data?.attributes?.url!} width={el?.attributes?.image?.data?.attributes?.width!} height={el?.attributes?.image?.data?.attributes?.height!} alt="Book" />
+                                        </div>
+                                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-[1.125rem] text-black-2  mx-auto mt-[35px]">{el?.attributes?.name}</p>
+                                        <p className="text-center font-[500] leading-[1.2] tracking-[0.2em] text-black-2  mx-auto">{el?.attributes?.size}</p>
+                                    </div>
+                                </SplideSlide>
+                            )
+                        })
+                    }
                 </SplideTrack>
                 <div className="splide__arrows">
                     <button className="splide__arrow splide__arrow--prev">  

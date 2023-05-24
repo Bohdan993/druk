@@ -18,7 +18,7 @@ interface OrderStep {
 
 const OrderStepItem: FC<OrderStep> = ({content, windowSize, customStyle, tooltip, showOnMobile}) => {
     return (
-        <SplideSlide className={`cursor-pointer md:mr-[10px] last:mr-0 md:px-[15px] lg:px-[18px] justify-center items-center rounded-[15px] md:bg-skin-dark ${!showOnMobile ? "flex md:hidden lg:flex" : "flex"}`} style={windowSize?.width! > 992 ? customStyle : {}} data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip})}>
+        <SplideSlide className={`cursor-pointer md:mr-[10px] last:mr-0 md:px-[15px] lg:px-[18px] justify-center items-center rounded-[15px] md:bg-skin-dark ${!showOnMobile ? "flex md:hidden lg:flex" : "flex"}`} style={windowSize?.width! > 991 ? customStyle : {}} data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip})}>
             <div className="flex justify-center items-center">
                 {typeof content === "object" ? (
                     <Image

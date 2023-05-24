@@ -28,7 +28,7 @@ const sliderOptions: Options = {
     keyboard: "global",
     height: "393px",
     breakpoints: {
-        992: {
+        991: {
             gap: "-160px"
         },
         576: {
