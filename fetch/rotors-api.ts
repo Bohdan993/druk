@@ -1,6 +1,6 @@
 // @ts-ignore
 import qs from 'qs';
-import { Rotor } from './../types/rotors';
+import { Rotor } from '../types/rotors';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 

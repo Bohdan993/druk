@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { setShowPopup } from "@/slices/popups";
 import { Dropzone } from "../Helpers/Dropzone";
-import { orderApi } from "@/api/order-api";
+import { orderApi } from "@/fetch/order-api";
 import {FileWithPath} from 'react-dropzone';
 
 

@@ -1,6 +1,6 @@
 // @ts-ignore
 import qs from 'qs';
-import { IAbout } from './../strapitypes/About';
+import { IAbout } from '../strapitypes/About';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 

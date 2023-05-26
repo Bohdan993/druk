@@ -8,7 +8,7 @@ import ReactStars from "react-rating-stars-component";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { testimonialsApi } from "@/api/testimonials-api";
+import { testimonialsApi } from "@/fetch/testimonials-api";
 import type {Raiting} from "@/types/testimonial";
 import locationIcon from "@/public/icon-location.svg";
 import Image from "next/image";

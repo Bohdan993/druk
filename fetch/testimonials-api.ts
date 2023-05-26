@@ -1,7 +1,7 @@
 // @ts-ignore
 import qs from 'qs';
 import { baseUrlApi as baseUrl} from '@/constants';
-import { TestimonialItem, Testimonial } from './../types/testimonial';
+import { TestimonialItem, Testimonial } from '../types/testimonial';
 
 
 type GetTestimonialsResponse = Promise<Testimonial[]>;

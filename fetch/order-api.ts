@@ -1,5 +1,5 @@
 import { baseUrlApi as baseUrl} from '@/constants';
-import { IApplication } from './../strapitypes/Application';
+import { IApplication } from '../strapitypes/Application';
 
 
 

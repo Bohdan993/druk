@@ -1,17 +1,32 @@
-import { FaqItem } from './../types/faq';
+// @ts-ignore
+import qs from 'qs';
+import { FaqItem } from '../types/faq';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 
 
-type GetFaqsResponse = Promise<FaqItem[]>;
-type GetFaqsSingleResponse = Promise<any>;
+type GetCluesResponse = Promise<FaqItem[]>;
+type GetCluesSingleResponse = Promise<any>;
 
-class FaqsApi {
-    async getFaqs() : GetFaqsResponse {
-        const query = 'fields[0]=active&fields[1]=answer&fields[2]=question';
+class CluesApi {
+    async getClues() : GetCluesResponse {
+        const query = qs.stringify( 
+            {
+                sort: ["order:asc"],
+                populate: {
+                    image: true,
+                    clueslists: {
+                        populate: "*"
+                    }
+                }
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        );
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/faqs?${query}`, {
+                const res = await fetch(`${baseUrl}/clues?${query}`, {
                 method: "GET",
                 // headers: {
                 //     'Content-Type': 'application/json',
@@ -24,14 +39,14 @@ class FaqsApi {
                     throw new Error(String(res.status));
                 }
         
-                const faqs = await res.json();
+                const clues = await res.json();
         
-                if (!faqs) {
+                if (!clues) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(faqs?.data);
+               resolve(clues?.data);
 
             } catch (err) {
                 console.error('[Api]: ', err);
@@ -41,10 +56,10 @@ class FaqsApi {
 
     }
 
-    async getFaqsSingle() : GetFaqsSingleResponse  {
+    async getCluesSingle() : GetCluesSingleResponse  {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/faqs`, {
+                const res = await fetch(`${baseUrl}/clues`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,14 +72,14 @@ class FaqsApi {
                     throw new Error(String(res.status));
                 }
         
-                const faqs = await res.json();
+                const clues = await res.json();
         
-                if (!faqs) {
+                if (!clues) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(faqs?.data);
+               resolve(clues?.data);
 
             } catch (err) {
                 console.error('[Api]: ', err);
@@ -76,4 +91,4 @@ class FaqsApi {
 
 }
 
-export const faqsApi = new FaqsApi();
+export const cluesApi = new CluesApi();

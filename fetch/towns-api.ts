@@ -1,4 +1,4 @@
-import { Towns } from './../types/towns';
+import { Towns } from '../types/towns';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 

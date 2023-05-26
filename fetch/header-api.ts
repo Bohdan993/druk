@@ -1,6 +1,6 @@
 // @ts-ignore
 import qs from 'qs';
-import { IHeader } from './../strapitypes/Header';
+import { IHeader } from '../strapitypes/Header';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 

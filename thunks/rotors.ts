@@ -1,4 +1,4 @@
-import { rotorsApi } from './../api/rotors-api';
+import { rotorsApi } from '../fetch/rotors-api';
 import { slice } from '../slices/rotors';
 import { AppThunk } from '../store';
 

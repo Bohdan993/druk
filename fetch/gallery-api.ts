@@ -1,65 +1,31 @@
 // @ts-ignore
 import qs from 'qs';
-import { FaqItem } from './../types/faq';
+import { IGallerysingle } from '../strapitypes/Gallerysingle';
+import { IGallery } from '../strapitypes/Gallery';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 
 
-type GetCluesResponse = Promise<FaqItem[]>;
-type GetCluesSingleResponse = Promise<any>;
 
-class CluesApi {
-    async getClues() : GetCluesResponse {
+type GetGalleryResponse = Promise<IGallery[]>;
+type GetGallerySingleResponse = Promise<IGallerysingle>;
+
+class GalleryApi {
+    async getGallery() : GetGalleryResponse {
         const query = qs.stringify( 
             {
-                sort: ["order:asc"],
                 populate: {
-                    image: true,
-                    clueslists: {
-                        populate: "*"
-                    }
+                    image: true
                 }
             },
             {
                 encodeValuesOnly: true, // prettify URL
             }
         );
+
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/clues?${query}`, {
-                method: "GET",
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'accept': 'application/json'
-                // },
-                })
-        
-                if(!res.ok && res.status!==200)
-                {
-                    throw new Error(String(res.status));
-                }
-        
-                const clues = await res.json();
-        
-                if (!clues) {
-                    reject(new Error('Виникла помилка при з\'єднання з сервером'));
-                    return;
-                }
-
-               resolve(clues?.data);
-
-            } catch (err) {
-                console.error('[Api]: ', err);
-                reject(new Error('Internal server error'));
-            }
-        });
-
-    }
-
-    async getCluesSingle() : GetCluesSingleResponse  {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const res = await fetch(`${baseUrl}/clues`, {
+                const res = await fetch(`${baseUrl}/galleries?${query}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,14 +38,47 @@ class CluesApi {
                     throw new Error(String(res.status));
                 }
         
-                const clues = await res.json();
+                const gallery = await res.json();
         
-                if (!clues) {
+                if (!gallery) {
                     reject(new Error('Виникла помилка при з\'єднання з сервером'));
                     return;
                 }
 
-               resolve(clues?.data);
+               resolve(gallery?.data);
+
+            } catch (err) {
+                console.error('[Api]: ', err);
+                reject(new Error('Internal server error'));
+            }
+        });
+
+    }
+
+    async getGallerySingle() : GetGallerySingleResponse  {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await fetch(`${baseUrl}/gallerysingle`, {
+                method: "GET",
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json'
+                // },
+                })
+        
+                if(!res.ok && res.status!==200)
+                {
+                    throw new Error(String(res.status));
+                }
+        
+                const gallery = await res.json();
+        
+                if (!gallery) {
+                    reject(new Error('Виникла помилка при з\'єднання з сервером'));
+                    return;
+                }
+
+               resolve(gallery?.data);
 
             } catch (err) {
                 console.error('[Api]: ', err);
@@ -91,4 +90,4 @@ class CluesApi {
 
 }
 
-export const cluesApi = new CluesApi();
+export const galleryApi = new GalleryApi();

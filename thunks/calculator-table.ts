@@ -1,4 +1,4 @@
-import { calculatorTableApi } from '@/api/calculator-table-api';
+import { calculatorTableApi } from '@/fetch/calculator-table-api';
 import { slice } from '../slices/calculator-table';
 import { AppThunk } from '../store';
 

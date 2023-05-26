@@ -1,4 +1,4 @@
-import { townsApi } from '@/api/towns-api';
+import { townsApi } from '@/fetch/towns-api';
 import { slice } from '../slices/towns';
 import { AppThunk } from '../store';
 

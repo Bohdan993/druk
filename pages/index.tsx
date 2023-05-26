@@ -8,21 +8,21 @@ import { getPriceTable } from "@/thunks/calculator-table";
 import { getRotors } from "@/thunks/rotors";
 import type { NextPage } from "next";
 import { Faq as FaqType } from './../types/faq'
-import { faqsApi } from "@/api/faqs-api";
-import { aboutApi } from "@/api/about-api";
+import { faqsApi } from "@/fetch/faqs-api";
+import { aboutApi } from "@/fetch/about-api";
 import Popups from "@/components/Popups/Popups";
 import { getTowns } from "@/thunks/towns";
-import { footerApi } from "@/api/footer-api";
+import { footerApi } from "@/fetch/footer-api";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { testimonialsApi } from "@/api/testimonials-api";
-import { headerApi } from "@/api/header-api";
+import { testimonialsApi } from "@/fetch/testimonials-api";
+import { headerApi } from "@/fetch/header-api";
 import { IHeader } from './../strapitypes/Header';
 import { IGallerysingle } from './../strapitypes/Gallerysingle';
 import { IGallery } from './../strapitypes/Gallery';
-import { galleryApi } from "@/api/gallery-api";
+import { galleryApi } from "@/fetch/gallery-api";
 import { IClue } from '@/strapitypes/Clue';
-import { cluesApi } from "@/api/clues-api";
+import { cluesApi } from "@/fetch/clues-api";
 
 
 

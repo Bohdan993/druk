@@ -1,4 +1,4 @@
-import { FileDimensions } from './../types/calculator-table';
+import { FileDimensions } from '../types/calculator-table';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 

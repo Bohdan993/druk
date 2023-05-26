@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { setShowPopup } from "@/slices/popups";
-import { orderApi } from "@/api/order-api";
+import { orderApi } from "@/fetch/order-api";
 
 
 
