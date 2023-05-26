@@ -12,7 +12,6 @@ const RotorType2: FC<RotorProps> = ({cx, cy, r, w, h, data}) => {
     const pieces = data?.attributes?.rotorpiece;
     const textRef = useRef<SVGTextElement | null>(null);
     const [textRect, setTextRect] = useState<DOMRect | null>(null);
-    // const [pieces, setPieces] = useState<Rotorpiece[]>(data?.attributes?.rotorpiece);
     const [activePiece, setActivePiece] = useState<Rotorpiece>(data?.attributes?.rotorpiece?.filter(el=>el?.active)[0]);
 
     const maxNumOfPieces = 15;
@@ -59,8 +58,8 @@ const RotorType2: FC<RotorProps> = ({cx, cy, r, w, h, data}) => {
 
 
     return (
-        <div className="h-[270px] flex flex-col items-center mb-[35px]">
-            <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.281rem] text-center">{data?.attributes?.title}</p>
+        <div className="h-[260px] md:h-[270px] flex flex-col items-center mb-[35px]">
+            <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.125rem] md:text-[1.281rem] text-center">{data?.attributes?.title}</p>
             <div className="mt-auto w-[238px] h-[238px] relative bg-skin-dark">
                 <div  className="w-[238px] h-[238px] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
                     <svg className=" fill-none cursor-pointer" viewBox={`0 0 ${w} ${h}`} width={w} height={h}>

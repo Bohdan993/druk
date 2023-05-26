@@ -66,8 +66,8 @@ const Rotor: FC<RotorProps> = ({cx, cy, r, w, h, data}) => {
     }
 
     return (
-        <div className="h-[270px] flex flex-col items-center mb-[35px]">
-            <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.281rem] text-center">{data?.attributes?.title}</p>
+        <div className="h-[260px] md:h-[270px] flex flex-col items-center mb-[35px]">
+            <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.125rem] md:text-[1.281rem] text-center">{data?.attributes?.title}</p>
             <div className="mt-auto w-[195px] h-[195px] rounded-[50%] relative bg-skin-dark" style={{boxShadow: "2.83784px 2.83784px 8.51351px rgba(0, 0, 0, 0.25), -2.83784px -2.83784px 8.51351px 0.567568px #FBF5E9"}}>
                 <div  className="w-[185px] h-[185px] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded-[50%] bg-rotor-gradient from-skin-light to-skin-dark">
                     <svg className="stroke-skin-dark rounded-[50%] stroke-[0.2px] fill-none cursor-pointer" viewBox={`0 0 ${w} ${h}`} width={w} height={h}>

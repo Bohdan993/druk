@@ -12,7 +12,9 @@ import iconInfo from "@/public/icon-info-2.svg";
 import Image from 'next/image';
 import { QuantityInput} from './QuantityInput';
 import { MyExtension } from '@/utils/splideExtension';
-
+import { IClue } from '@/strapitypes/Clue';
+import { makeTooltipMarkup } from '@/utils/makeTooltipMarkup';
+import infoIcon from "@/public/icon-info-2.svg";
 
 
 const sliderOptions: Options = {
@@ -32,14 +34,18 @@ const sliderOptions: Options = {
     }
 };
 
+type CalculatorProps = {
+    data: IClue[]
+}
 
-const Calculator: FC = () => {
+const Calculator: FC<CalculatorProps> = ({data}) => {
 
     const rotorSliderRef = useRef<Splide| null>(null);
     const orderStepsSliderRef = useRef<Splide| null>(null);
     const rotorsState = useAppSelector<RotorType[]>(selectRotorsState);
     const [quantity, setQuantity] = useState('1');
     const [show, setShow] = useState(false);
+    let index = 0;
 
     const handleQuantityChange = (e: ChangeEvent<HTMLInputElement> | {target: {value: string}}) => {
         let inputValue =  e.target.value.replace(/\D/, "");
@@ -66,13 +72,14 @@ const Calculator: FC = () => {
         <div className="calculator bg-skin-dark md:h-auto overflow-x-hidden">
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px] relative h-full md:h-auto">
                 <div className="md:relative ml-[185px] static">
-                    <OrderSteps sliderRef={orderStepsSliderRef}/>
+                    <OrderSteps sliderRef={orderStepsSliderRef} data={data}/>
                 </div>
                 <div className="md:flex justify-between items-stretch">
                     <div className="basis-[100%] lg:basis-[65.59%] md:pt-[109px] md:mr-[37.5px] md:pb-[65px]">
                         <Splide extensions={{MyExtension}} ref={(slider) => (rotorSliderRef.current = slider)} className="rotor-carousel " aria-label="Books gallery" options={sliderOptions} hasTrack={false}>
                             <SplideTrack>
                                 {rotorsState?.map((rotor, i) => {
+                                    index = i;
                                     return (
                                         <SplideSlide key={rotor.id}>
                                             <div className="basis-[33%] md:mx-[5px] shrink relative">
@@ -86,7 +93,7 @@ const Calculator: FC = () => {
                                                     data={rotor}
 
                                                 />
-                                                <div className="md:hidden absolute right-[25px] top-[60px]">
+                                                <div className="md:hidden absolute right-[25px] top-[60px]" data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip: data[i]?.attributes?.clue, list: data[i]?.attributes?.clueslists})}>
                                                     <Image src={iconInfo} alt="Info Icon" className="min-w-[25px]"/>
                                                 </div>
                                             </div>
@@ -95,19 +102,23 @@ const Calculator: FC = () => {
                                 })}
                                 <SplideSlide className="table-slide md:hidden" data-class="quantity-slide">
                                     <div className="relative">
+                                        <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.125rem] md:text-[1.281rem] text-center mb-[40px]">Наклад</p>
                                             <QuantityInput
                                                 quantity={quantity}
                                                 handleQuantityChange={handleQuantityChange}
                                             />
-                                        <div className="md:hidden absolute right-[25px] top-[60px]">
+                                            <span className="hidden">{index++}</span>
+                                        <div className="md:hidden absolute right-[25px] top-[60px]"  data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip: data[index]?.attributes?.clue, list: data[index]?.attributes?.clueslists})}>
                                             <Image src={iconInfo} alt="Info Icon" className="min-w-[25px]"/>
                                         </div>
                                     </div>
                                 </SplideSlide>
                                 <SplideSlide className="table-slide md:hidden" data-class="table-slide">
                                     <div className="relative">
+                                        <p className="font-bold leading-[25px] tracking-[0.2em] text-black text-[1.125rem] md:text-[1.281rem] text-center mb-[40px]">Замовлення</p>
                                         <CalculatorTable quantity={quantity} handleQuantityChange={handleQuantityChange}/>
-                                        <div className="md:hidden absolute right-[25px] top-[60px]">
+                                        <span className="hidden">{index++}</span>
+                                        <div className="md:hidden absolute right-[25px] top-[60px]"  data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip: data[index]?.attributes?.clue, list: data[index]?.attributes?.clueslists})}>
                                             <Image src={iconInfo} alt="Info Icon" className="min-w-[25px]"/>
                                         </div>
                                     </div>
@@ -115,7 +126,8 @@ const Calculator: FC = () => {
                                 <SplideSlide className="buttons-slide lg:mt-[-20px]" data-class="buttons-slide">
                                     <div className="relative md:mt-[157px] lg:mt-0">
                                         <OrderButtons/>
-                                        <div className="md:hidden absolute right-[25px] top-[60px]">
+                                        <span className="hidden">{index++}</span>
+                                        <div className="md:hidden absolute right-[25px] top-[60px]"  data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip: data[index]?.attributes?.clue, list: data[index]?.attributes?.clueslists})}>
                                             <Image src={iconInfo} alt="Info Icon" className="min-w-[25px]"/>
                                         </div>
                                     </div>

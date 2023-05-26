@@ -21,6 +21,8 @@ import { IHeader } from './../strapitypes/Header';
 import { IGallerysingle } from './../strapitypes/Gallerysingle';
 import { IGallery } from './../strapitypes/Gallery';
 import { galleryApi } from "@/api/gallery-api";
+import { IClue } from '@/strapitypes/Clue';
+import { cluesApi } from "@/api/clues-api";
 
 
 
@@ -35,10 +37,11 @@ type HomePageProps = {
   testimonials: any;
   header:IHeader;
   gallery: IGallery[],
-  gallerySingle:IGallerysingle
+  gallerySingle:IGallerysingle,
+  clues: IClue[]
 }
 
-const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle}) => {
+const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle, clues}) => {
 
   // console.log(header);
 
@@ -46,7 +49,7 @@ const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, heade
     <>
       <Header data={header}/>
       <main>
-        <Calculator/>
+        <Calculator data={clues}/>
         <Gallery data={gallery} dataSingle={gallerySingle}/>
         <Faq data={faqs}/>
         <Testimonials data={testimonials}/>
@@ -66,7 +69,7 @@ export const getServerSideProps =  wrapper.getServerSideProps(
       //   'Cache-Control',
       //   'public, s-maxage=10, stale-while-revalidate=59',
       // );
-      const [faqs, about, footer, testimonials, header, gallery, gallerySingle]  = await Promise.all([
+      const [faqs, about, footer, testimonials, header, gallery, gallerySingle, clues]  = await Promise.all([
         faqsApi.getFaqs(), 
         aboutApi.getAbout(), 
         footerApi.getFooter(),
@@ -74,6 +77,7 @@ export const getServerSideProps =  wrapper.getServerSideProps(
         headerApi.getHeader(),
         galleryApi.getGallery(),
         galleryApi.getGallerySingle(),
+        cluesApi?.getClues(),
         dispatch(getPriceTable()), 
         dispatch(getRotors()),
         dispatch(getTowns())
@@ -88,7 +92,8 @@ export const getServerSideProps =  wrapper.getServerSideProps(
           testimonials,
           header,
           gallery,
-          gallerySingle
+          gallerySingle,
+          clues
         },
       };
     }

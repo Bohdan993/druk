@@ -80,98 +80,100 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
     }
 
     return (
-        <div className="flex flex-col md:flex-row lg:flex-col lg:h-full max-w-[270px] mx-auto md:mx-[unset] max-h-[440px] md:max-h-[unset] md:max-w-[unset] calculator-table md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 relative w-full">
-            <div className="flex flex-col pr-[18px] lg:pr-0 basis-[50%] lg:basis-[unset]">
-                <div className="flex items-center justify-between lg:justify-start mb-[5px] lg:mb-[15px]">
-                    <p className="font-[600] leading-[19.2px] tracking-[0.2em] lg:basis-[50%] text-black-2 mr-[8px]">Наклад</p>
-                    <div className="lg:basis-[50%]">
-                        <QuantityInput
-                            quantity={quantity}
-                            handleQuantityChange={handleQuantityChange}
-                        />
+        <div className="md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 p-[13px] max-w-[270px] mx-auto md:mx-[unset] lg:h-full calculator-table-container">
+            <div className="flex flex-col md:flex-row lg:flex-col  md:max-h-[unset] md:max-w-[unset] calculator-table max-h-[440px] relative w-full">
+                <div className="flex flex-col md:pr-[18px] lg:pr-0 basis-[50%] lg:basis-[unset]">
+                    <div className="flex items-center justify-between lg:justify-start mb-[10px] lg:mb-[15px]">
+                        <p className="font-[600] leading-[1.2] tracking-[0.2em] lg:basis-[50%] text-black-2 mr-[8px] text-[0.876rem] md:text-[1rem]">Наклад</p>
+                        <div className="lg:basis-[50%]">
+                            <QuantityInput
+                                quantity={quantity}
+                                handleQuantityChange={handleQuantityChange}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="flex items-center justify-between lg:justify-start mb-[5px] lg:mb-[15px]">
-                    <p className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 lg:basis-[50%] mr-[8px]">Дата готовності</p>
-                    <div className="lg:basis-[50%]">
-                        <DateInput 
-                            className="font-[600] w-auto text-center leading-[1.2] tracking-[0.2em] py-[10px] px-[15px] lg:px-[30px] text-black bg-transparent lg:bg-skin-light border-fiolet border-[1px] rounded-[20px] outline-none max-w-[173px]"
-                            value={date}
-                            onChange={handleChange}/>
+                    <div className="flex items-center justify-between lg:justify-start mb-[10px] lg:mb-[15px]">
+                        <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 lg:basis-[50%] mr-[8px] text-[0.876rem] md:text-[1rem]">Дата готовності</p>
+                        <div className="lg:basis-[50%]">
+                            <DateInput 
+                                className="font-[600] text-[0.875rem]  md:text-[1rem] w-auto text-center leading-[1.2] tracking-[0.2em] px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-black bg-transparent border-fiolet border-[1px] rounded-[20px] outline-none max-w-[173px] bg-skin-light"
+                                value={date}
+                                onChange={handleChange}/>
+                        </div>
                     </div>
-                </div>
-                {rotorsState?.map(rotor => {
-                        if(rotor?.attributes?.type !== "multiselect") {
-                            return (
-                                <div className="flex items-center lg:justify-start justify-between mb-[5px] lg:mb-[15px] last:mb-0 lg:last:mb-[15px]" key={rotor?.id}>
-                                    <p className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 lg:basis-[50%] mr-[8px]">{rotor?.attributes?.title}</p>
-                                    <div className="lg:basis-[50%] lg:flex">
-                                        <div className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green lg:px-[30px] lg:py-[10px] px-[20px] py-[15px] text-center inline-flex">{rotor?.attributes?.rotorpiece.find(rp => rp?.active)?.text}</div>
-                                    </div>
-                                </div> 
-                            )
-                        }
+                    {rotorsState?.map(rotor => {
+                            if(rotor?.attributes?.type !== "multiselect") {
+                                return (
+                                    <div className="flex items-center lg:justify-start justify-between mb-[10px] lg:mb-[15px] md:last:mb-0 lg:last:mb-[15px]" key={rotor?.id}>
+                                        <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 lg:basis-[50%] mr-[8px] text-[0.876rem] md:text-[1rem]">{rotor?.attributes?.title}</p>
+                                        <div className="lg:basis-[50%] lg:flex">
+                                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex">{rotor?.attributes?.rotorpiece.find(rp => rp?.active)?.text}</div>
+                                        </div>
+                                    </div> 
+                                )
+                            }
 
-                })}
+                    })}
 
-            </div>
-            
-            <div className="flex flex-col pl-[18px] lg:pl-0 basis-[50%] lg:basis-[unset]">
-                <div className="flex items-center lg:justify-start justify-between mb-[5px] lg:mb-[15px]">
-                    <p className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 mr-[8px] lg:basis-[50%]">Вартість 1 од.</p>
-                    <div className="lg:basis-[50%]">
-                        <div className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green lg:px-[30px] lg:py-[10px] px-[20px] py-[15px] text-center inline-flex">{subTotalContent} грн.</div>
-                    </div>
-                </div> 
-                {rotorsState?.map(rotor => {
-                        if(rotor?.attributes?.type === "multiselect") {
-                            return rotor?.attributes?.rotorpiece?.map(rp => {
-                                if(rp?.active) {
-                                    return (
-                                        <div className="flex items-center lg:justify-start justify-between mb-[5px] lg:mb-[15px]" key={rp?.id}>
-                                            <p className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2 mr-[8px] lg:basis-[50%]">{rp?.text}</p>
-                                            <div className="lg:basis-[50%]">
-                                                <div className="font-[600] leading-[19.2px] tracking-[0.2em] text-black-2  rounded-[20px] border-[1px] border-natural-green lg:px-[30px] lg:py-[10px] px-[20px] py-[15px] whitespace-nowrap text-center inline-flex">{(calculatorTableState as any)[rp?.key]} грн.</div>
-                                            </div>
-                                        </div> 
-                                    )
-                                }
-                            })
-                        }
-                })}
-                <div className="mt-auto block lg:hidden">
-                {
-                    typeof totalContent === 'number' ? (
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2 flex justify-between items-center">
-                            Вартість:
-                            <span className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-natural-green lg:text-fiolet ml-[8px] text-center">
-                                {totalContent} грн.
-                            </span>
-                        </p>
-                    ) :
-                    (
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2 text-center">
-                            <span className="font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet ">{totalContent}</span>
-                        </p>
-                    )
-                }
-            </div>
-            </div>
-            <div className="mt-auto hidden lg:block">
-                {
-                    typeof totalContent === 'number' ? (
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2">
-                            Вартість :<span className="pl-[32px] font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet">
-                                {totalContent} грн.
+                </div>
+                
+                <div className="flex flex-col md:pl-[18px] lg:pl-0 basis-[50%] lg:basis-[unset]">
+                    <div className="flex items-center lg:justify-start justify-between mb-[10px] lg:mb-[15px]">
+                        <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 mr-[8px] lg:basis-[50%] text-[0.876rem] md:text-[1rem]">Вартість 1 од.</p>
+                        <div className="lg:basis-[50%]">
+                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex">{subTotalContent} грн.</div>
+                        </div>
+                    </div> 
+                    {rotorsState?.map(rotor => {
+                            if(rotor?.attributes?.type === "multiselect") {
+                                return rotor?.attributes?.rotorpiece?.map(rp => {
+                                    if(rp?.active) {
+                                        return (
+                                            <div className="flex items-center lg:justify-start justify-between mb-[10px] lg:mb-[15px]" key={rp?.id}>
+                                                <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 mr-[8px] lg:basis-[50%] text-[0.876rem] md:text-[1rem]">{rp?.text}</p>
+                                                <div className="lg:basis-[50%]">
+                                                    <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2  rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] whitespace-nowrap text-center inline-flex">{(calculatorTableState as any)[rp?.key]} грн.</div>
+                                                </div>
+                                            </div> 
+                                        )
+                                    }
+                                })
+                            }
+                    })}
+                    <div className="mt-auto block lg:hidden">
+                    {
+                        typeof totalContent === 'number' ? (
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.25rem] text-black-2 flex justify-between items-center">
+                                Вартість:
+                                <span className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-natural-green lg:text-fiolet ml-[8px] text-center">
+                                    {totalContent} грн.
                                 </span>
-                        </p>
-                    ) :
-                    (
-                        <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2 text-center">
-                            <span className="font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet ">{totalContent}</span>
-                        </p>
-                    )
-                }
+                            </p>
+                        ) :
+                        (
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-black-2 text-center text-[1.25rem]">
+                                <span className="font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet ">{totalContent}</span>
+                            </p>
+                        )
+                    }
+                </div>
+                </div>
+                <div className="mt-auto hidden lg:block">
+                    {
+                        typeof totalContent === 'number' ? (
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2">
+                                Вартість :<span className="pl-[32px] font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet">
+                                    {totalContent} грн.
+                                    </span>
+                            </p>
+                        ) :
+                        (
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2 text-center">
+                                <span className="font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet ">{totalContent}</span>
+                            </p>
+                        )
+                    }
+                </div>
             </div>
         </div>
     );

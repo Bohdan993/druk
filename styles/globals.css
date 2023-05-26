@@ -19,7 +19,7 @@ body {
 
 .calculator {
   height: calc(100vh - 60px);
-  min-height: 650px;
+  min-height: 780px;
 }
 
 .books-gallery .splide__slide {
@@ -174,6 +174,9 @@ body {
   padding: 10px;
 }
 
+.order-steps-tooltip-text {
+  font-size: 0.875rem;
+}
 
 
 .order-button {
@@ -441,7 +444,13 @@ body {
   display: none;
 }
 
-
+.showBurgerMobilePopup .rodal-dialog,
+.showBurgerTabletPopup .rodal-dialog{
+  width: 211px!important;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 20px;
+}
 
 /* textarea::-moz-placeholder, */
 /* textarea::-webkit-textarea-placeholder, */
@@ -555,6 +564,11 @@ body {
 .popup-select.order-popup-select {
   max-width: 95px;
 }
+
+.popup-select.order-popup-select-2 {
+  max-height: 33px;
+}
+
 .popup-select.order-popup-select-2 .popup__control,
 .popup-select.order-popup-select .popup__control{
   border-color: #262626;
@@ -689,6 +703,9 @@ body {
   color: #AEC670;
   padding-top: 6px;
   padding-bottom: 6px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .popup-select.order-popup-select-2 .popup__control .popup__placeholder {
@@ -844,11 +861,11 @@ input[type="radio"]:checked::before {
     flex-basis: 100%;
   }
 
-  .order-steps li {
+  .order-steps li:not(.clue-inner-item) {
     box-shadow: 2.83784px 2.83784px 8.51351px rgba(0, 0, 0, 0.25), -2.83784px -2.83784px 8.51351px 0.567568px #FBF5E9;
   }
 
-  .order-steps li:hover {
+  .order-steps li:hover:not(.clue-inner-item) {
     background-color: #AEC670;
   }
   
@@ -1005,6 +1022,10 @@ input[type="radio"]:checked::before {
 
 @media screen and (max-width: 767px) {
 
+  .calculator {
+    height: calc(100vh - 88px);
+  }
+
   .rotor-carousel .splide__pagination .splide__pagination__page {
     background: rgba(255, 255, 255, 0.3);
     width: 12px;
@@ -1081,7 +1102,7 @@ input[type="radio"]:checked::before {
 
   .order-steps-carousel .splide__slide.is-active {
     transform: translateY(-37px);
-    pointer-events: all;
+    pointer-events: none;
   }
 
   .order-steps-tooltip-container {
@@ -1104,6 +1125,8 @@ input[type="radio"]:checked::before {
     z-index: 0;
   }
 
+  #order-steps-tooltip-order-with-file,
+  #order-steps-tooltip-order-without-file,
   #order-steps-tooltip {
     position: static;
     background-color: transparent;
@@ -1115,7 +1138,12 @@ input[type="radio"]:checked::before {
     backdrop-filter:unset;
   /* Note: backdrop-filter has minimal browser support */
     border-radius: unset;
-    padding: 50px 0;
+    padding: 50px;
+  }
+
+  #order-steps-tooltip-order-with-file,
+  #order-steps-tooltip-order-without-file {
+    color: #262626;
   }
 
   .showTestimonialsPopup .rodal-dialog {
@@ -1188,32 +1216,71 @@ input[type="radio"]:checked::before {
   }
 
   .rotor-carousel[data-current-slide="buttons-slide"] {
-    padding-top: 80px;
+    /* padding-top: 80px; */
     padding-bottom: 34px;
   }
 
   .rotor-carousel[data-current-slide="table-slide"] {
-    padding-top: 120px;
+    /* padding-top: 120px; */
     padding-bottom: 34px;
   }
 
   .rotor-carousel{
-    padding-top: 130px;
+    padding-top: 80px;
   }
 
-  .calculator-table {
+  .calculator-table-container {
     background: rgba(255, 255, 255, 0.3);
     box-shadow: inset 0px 5.2px 5.2px rgba(255, 255, 255, 0.15), inset 0px 0px 78px rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(19.5px);
-    /* Note: backdrop-filter has minimal browser support */
-    padding: 13px;
     border-radius: 26px;
+  }
+
+  .calculator-table {
+
+    /* Note: backdrop-filter has minimal browser support */
+    /* padding: 13px; */
+    
     overflow-y: auto;
-    padding-right: 52px;
+    padding-right: 22px;
+  }
+
+  .calculator-table:before {
+    display: none;
+  }
+
+  .calculator-table .quantity-input {
+    padding: 13px 2px;
+    /* width: 45px; */
+    height: 44px; 
+  }
+
+  .clue-info-icon {
+    margin-right: 28px;
+    width: 39px;
+    height: 39px;
   }
 
   .order-button .rotor {
     width: 180px;
     height: 180px;
+  }
+
+ .calculator-table::-webkit-scrollbar-track
+  {
+    border-radius: 18px;
+    background-color:#FBF5E9;
+  }
+
+  .calculator-table::-webkit-scrollbar
+  {
+    width: 19px;
+    background-color:#FBF5E9;
+  }
+
+  .calculator-table::-webkit-scrollbar-thumb
+  {
+    border-radius: 19px;
+    background-color: #F4E1BF;
   }
 }

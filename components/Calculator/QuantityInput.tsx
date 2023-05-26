@@ -40,7 +40,7 @@ export const QuantityInput: FC<QuantityInputProps> = ({quantity, handleQuantityC
                     ></path>
                 </svg>
             </button>
-            <input type="text" value={quantity} onChange={handleQuantityChange} className="quantity-input text-center" size={7} />
+            <input type="text" value={quantity} onChange={handleQuantityChange} className="quantity-input text-center text-[0.875rem]  md:text-[1rem]" size={7} />
             <button onClick={handleClickPlus} className={`${+quantity >= 9999 ? "opacity-[0.5]" : ""} ml-[10px]`}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

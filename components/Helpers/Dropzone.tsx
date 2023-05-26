@@ -40,26 +40,15 @@ const baseStyle: CSSProperties = {
 
   type DropzoneProps = {
     isDisabled: boolean,
-    setFile: any
+    setFile: any,
+    filesProp: string | FileWithPath
   }
 
 
-export const Dropzone: FC<DropzoneProps> = ({isDisabled = false, setFile}) => {
-  const onDrop = useCallback((acceptedFiles: Blob[]) => {
-    console.log(acceptedFiles);
-    acceptedFiles.forEach((file: Blob) => {
+export const Dropzone: FC<DropzoneProps> = ({isDisabled = false, setFile, filesProp}) => {
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    acceptedFiles.forEach((file: FileWithPath) => {
       setFile(file);
-
-      // const reader = new FileReader()
-
-      // reader.onabort = () => console.log('file reading was aborted')
-      // reader.onerror = () => console.log('file reading has failed')
-      // reader.onload = () => {
-      // // Do whatever you want with the file contents
-      //   const binaryStr = reader.result
-      //   console.log(binaryStr)
-      // }
-      // reader.readAsArrayBuffer(file)
     })
     
   }, [setFile]);
@@ -69,8 +58,7 @@ export const Dropzone: FC<DropzoneProps> = ({isDisabled = false, setFile}) => {
     getInputProps, 
     isFocused,
     isDragAccept,
-    isDragReject,
-    acceptedFiles
+    isDragReject
 } = useDropzone({onDrop, multiple: false, disabled: isDisabled, accept: {
     'image/vnd.djvu': ['.djvu'],
     'text/fb2+xml': ['.fb2'],
@@ -89,17 +77,23 @@ export const Dropzone: FC<DropzoneProps> = ({isDisabled = false, setFile}) => {
     isDragReject
   ]);
 
-  const files = acceptedFiles.map((file: FileWithPath) => (
-    <li key={file.path}>
-      {file.path} - {Math.floor(file.size/1000)} Кбайт
-    </li>
-  ));
+  const files = filesProp === "" ? [] : [filesProp].map((file: string | FileWithPath) => {
+    if(typeof file === 'string') {
+      return "";
+    }
+
+    return (
+      <li key={file!?.path!}>
+        {file!?.path!} - {Math.floor(file!?.size!/1000)} Кбайт
+      </li>
+    )
+  });
 
   return (
     <>
         <div {...getRootProps({style, className: `dropzone ${isDisabled ? 'disabled' : ''}`})}>
             <input {...getInputProps()}/>
-            <p className="text-center">{files?.length ? <ul>{files}</ul> : parse("Перенесіть файл сюди <br> чи <br> натисніть тут")}</p>
+            <div className="text-center">{files?.length ? <ul>{files}</ul> : parse("Перенесіть файл сюди <br> чи <br> натисніть тут")}</div>
         </div>
     </>
   )

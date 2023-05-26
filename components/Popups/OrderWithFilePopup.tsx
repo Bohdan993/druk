@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { setShowPopup } from "@/slices/popups";
 import { Dropzone } from "../Helpers/Dropzone";
+import { orderApi } from "@/api/order-api";
+import {FileWithPath} from 'react-dropzone';
 
 
 
@@ -14,14 +16,11 @@ type Inputs = {
     phoneoperator: string;
     phonenum: string;
     url: string;
-    file: string;
     bounding: "Тверда" | "М'яка";
     color: "ЧБ" | "Колір";
     advancedservices: string;
-    bookname: string;
-    bookauthor: string;
     comment: string;
-    "file-radio": string;
+    "file-radio": "Файл" | "Посилання";
 };
 
 type OptionType = {
@@ -30,12 +29,20 @@ type OptionType = {
 }
 
 const schema = yup.object({
+    'file-radio': yup.string(),
     name: yup.string()
         .required("Це поле обов'язкове для заповнення")
         .min(3, "Поле має містити мінімум 3 символа")
         .max(20, "Поле має містити максимум 20 символів"),
-    phonenum: yup.string(),
-    url: yup.string()
+    phonenum: yup.string().matches(/^\+?3?8?(0[5-9][0-9]\d{7})$/, "Введено не коректний номер телефону")
+    .required("Це поле обов'язкове для заповнення"),
+    comment:  yup.string().max(200, "Поле має містити максимум 200 символів"),
+    url: yup
+    .string()
+    .when("file-radio", {
+        is: (val: string) => val === "Посилання",
+        then:(schema) => yup.string().required("Це поле обов'язкове для заповнення")
+    })
   }).required();
 
 const phoneOpts: OptionType[] = [
@@ -90,7 +97,7 @@ const DropdownIndicator = (
 const OrderWithFilePopup: FC<any> = (props) => {
 
     const dispatch = useAppDispatch();
-    const [file, setFile] = useState('');
+    const [file, setFile] = useState<FileWithPath | string>('');
 
     const { register, setValue, watch, handleSubmit, formState: { errors, isSubmitting } } = useForm<Inputs>(
         {   
@@ -99,7 +106,9 @@ const OrderWithFilePopup: FC<any> = (props) => {
             defaultValues: {
                 "file-radio": 'Файл',
                 bounding: "Тверда",
-                color: "ЧБ"
+                color: "ЧБ",
+                url: "",
+                comment: ""
             }
         }
     );
@@ -108,16 +117,20 @@ const OrderWithFilePopup: FC<any> = (props) => {
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
         try {
-            const formData = new FormData();
-            console.log(data);
-            // await testimonialsApi.postTestimonial({
-            //     name: data?.name,
-            //     review: data?.review,
-            //     town: data?.town,
-            // })
+            await orderApi.postOrder({
+                name: data?.name || "",
+                bounding: data?.bounding,
+                color: data?.color,
+                comment: data?.comment || "",
+                advancedservices: data?.advancedservices || "",
+                phonenum: data?.phonenum || "",
+                phoneoperator: data?.phoneoperator || "",
+                url: data?.url || "",
+                file: file || "",
+            });
             dispatch(setShowPopup({key: "showOrderThanksPopup", state: true}));
         } catch(err) {
-
+            dispatch(setShowPopup({key: "showFailPopup", state: true}));
         }
 
     }
@@ -126,6 +139,16 @@ const OrderWithFilePopup: FC<any> = (props) => {
         setValue("phoneoperator", phoneOpts[0]["value"]);
     }, [setValue]);
 
+    useEffect(() =>{
+        if(watchFileRadio !== "Посилання") {
+            setValue("url", "");
+        }
+
+        if(watchFileRadio !== "Файл") {
+            setFile("");
+        }
+
+    }, [watchFileRadio, setValue]);
 
     return (    
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -156,21 +179,7 @@ const OrderWithFilePopup: FC<any> = (props) => {
                     </div>
                     
                 </div>
-                <p className="text-danger absolute right-0 bottom-0">{errors?.phonenum?.message}</p>
-            </div>
-            <div className="pb-[15px] relative">
-                <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-bookname`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Назва книги"}</label>
-                    <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть повну назву" id={`${props?.id}-bookname`} {...register("bookname")} />
-                </div>
-                <p className="text-danger absolute right-0 bottom-0">{errors?.bookname?.message}</p>
-            </div>
-            <div className="pb-[35px] relative">
-                <div className="flex justify-between items-center">
-                    <label htmlFor={`${props?.id}-bookauthor`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Автор книги"}</label>
-                    <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть ФІО" id={`${props?.id}-bookauthor`} {...register("bookauthor")} />
-                </div>
-                <p className="text-danger absolute right-0 bottom-0">{errors?.bookauthor?.message}</p>
+                <p className="text-danger absolute right-0 bottom-[20px]">{errors?.phonenum?.message}</p>
             </div>
             <div>
                 <fieldset className="mb-[35px]">
@@ -179,17 +188,17 @@ const OrderWithFilePopup: FC<any> = (props) => {
                             
                             <input type="radio" id={`${props?.id}-file`} value="Файл" {...register("file-radio")} className="mr-[12px]"/>
                             <label htmlFor={`${props?.id}-file`} className="block w-full">
-                                <Dropzone isDisabled={watchFileRadio !== "Файл"} setFile={setFile}/>
+                                <Dropzone isDisabled={watchFileRadio !== "Файл"} setFile={setFile} filesProp={file}/>
                             </label>
                         </div>
                         <div className="flex items-center">
                             <input type="radio" id={`${props?.id}-file2`} value="Посилання" {...register("file-radio")} className="mr-[22px]"/>
-                            <div>
+                            <div className="relative">
                                 <label htmlFor={`${props?.id}-file2`} className="flex items-center w-full cursor-pointer">
                                     <p className="bais-[30%] mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">Посилання</p>
                                     <input className={`input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px] ${watchFileRadio !== "Посилання" ? "bg-gray": ""}`} disabled={watchFileRadio !== "Посилання"} type="text" placeholder="Введіть посилання" id={`${props?.id}-url`} {...register("url")} />
                                 </label>
-                                <p className="text-danger absolute right-0 bottom-0">{errors?.url?.message}</p>
+                                <p className="text-danger absolute right-0 bottom-[-15px]">{watchFileRadio === "Посилання" && errors?.url?.message}</p>
                             </div>
                             
                         </div>
@@ -231,12 +240,12 @@ const OrderWithFilePopup: FC<any> = (props) => {
             </div>
             <div className="pb-[15px] relative">
                 <div className="flex justify-between items-center">
-                    <label className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2]">{"Додаткові послуги"}</label>
+                    <label className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] whitespace-nowrap">{"Додаткові послуги"}</label>
                     <div>
                         <Select
                             isMulti
                             options={additionalServicesOpts} 
-                            onChange={(selectOptionType) => setValue("advancedservices", (selectOptionType as any)["value"] || "")}
+                            onChange={(selectOptionType) => {setValue("advancedservices", selectOptionType.map(el => el?.value).join(" | ") || "")}}
                             className="popup-select order-popup-select-2"
                             classNamePrefix="popup"
                             placeholder={"Оберіть послуги"}
@@ -251,7 +260,6 @@ const OrderWithFilePopup: FC<any> = (props) => {
                     />
                     </div>
                 </div>
-                <p className="text-danger absolute right-0 bottom-0">{errors?.phonenum?.message}</p>
             </div>
             <div className="pb-[25px] relative">
                 <div>
@@ -262,7 +270,7 @@ const OrderWithFilePopup: FC<any> = (props) => {
                     </textarea>
                 </div>
 
-                <p className="text-danger absolute left-0 bottom-[3px]">{errors?.comment?.message}</p>
+                <p className="text-danger absolute left-0 bottom-[-20px]">{errors?.comment?.message}</p>
             </div>
             <div className="w-full flex justify-center">
                 <button disabled={isSubmitting} type="submit" className="popup-btn-1 font-[700!important]">Замовити</button>

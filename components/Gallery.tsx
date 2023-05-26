@@ -46,7 +46,6 @@ const Gallery: FC<GalleryProps> = ({data, dataSingle}) => {
                 <SplideTrack>
                     {
                         data?.map(el => {
-                            console.log(el);
                             return(
                                 <SplideSlide className="relative cursor-pointer" key={el?.id}>
                                     <div>
