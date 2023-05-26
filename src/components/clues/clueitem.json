@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_clues_clueitems",
+  "info": {
+    "displayName": "Підказка (елемент списку)",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "clueitemtext": {
+      "type": "text"
+    }
+  }
+}

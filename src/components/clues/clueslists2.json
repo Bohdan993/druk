@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_clues_clueslists2s",
+  "info": {
+    "displayName": "Підказка (список у вигляді окремих елементів)",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "clueslists2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "clues.clueitem"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_clues_cluelists",
+  "info": {
+    "displayName": "Підказка (список у вигляді таблиці)",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "clueitem": {
+      "displayName": "clueitem",
+      "type": "component",
+      "repeatable": true,
+      "component": "clues.clueitem"
+    }
+  }
+}
