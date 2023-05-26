@@ -12,10 +12,10 @@ class CalculatorTableApi {
             try {
                 const res = await fetch(`${baseUrl}/price-tavble`, {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json'
+                // },
                 })
         
                 if(!res.ok && res.status!==200)

@@ -22,10 +22,10 @@ class TestimonialsApi {
             try {
                 const res = await fetch(`${baseUrl}/testimonials?${query}`, {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json'
+                // },
                 })
         
                 if(!res.ok && res.status!==200)
@@ -56,10 +56,10 @@ class TestimonialsApi {
             try {
                 const res = await fetch(`${baseUrl}/testimonials`, {
                 method: "POST",
-                headers: {
-                        'Content-Type': 'application/json',
-                        'accept': 'application/json'
-                    },
+                // headers: {
+                //         'Content-Type': 'application/json',
+                //         'accept': 'application/json'
+                //     },
                 body: JSON.stringify(
                         {
                             "data": {

@@ -64,7 +64,7 @@ const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, heade
 
 export const getServerSideProps =  wrapper.getServerSideProps(
   ({ dispatch }) =>
-    async ({req, res, ...etc}) => {
+    async ({req, res}) => {
       // res.setHeader(
       //   'Cache-Control',
       //   'public, s-maxage=10, stale-while-revalidate=59',

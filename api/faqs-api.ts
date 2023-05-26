@@ -13,10 +13,10 @@ class FaqsApi {
             try {
                 const res = await fetch(`${baseUrl}/faqs?${query}`, {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json'
+                // },
                 })
         
                 if(!res.ok && res.status!==200)

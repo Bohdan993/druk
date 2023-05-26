@@ -84,11 +84,11 @@ class FooterApi {
             try {
                 const res = await fetch(`${baseUrl}/footer?${query}`, {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json',
-                    'cache-control': 'public, s-maxage=1200, stale-while-revalidate=600',
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json',
+                //     'cache-control': 'public, s-maxage=1200, stale-while-revalidate=600',
+                // },
                 })
         
                 if(!res.ok && res.status!==200)

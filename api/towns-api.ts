@@ -11,10 +11,10 @@ class TownsApi {
             try {
                 const res = await fetch(`${baseUrl}/tabliczya-mist`, {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json'
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'accept': 'application/json'
+                // },
                 })
         
                 if(!res.ok && res.status!==200)
