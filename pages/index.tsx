@@ -42,7 +42,7 @@ type HomePageProps = {
 }
 
 const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle, clues}) => {
-  console.log(header);
+
   return (
     <>
       <Header data={header}/>

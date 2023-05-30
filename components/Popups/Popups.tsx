@@ -52,7 +52,7 @@ const Popups: FC<PopupsProps> = ({burgerData}) => {
         { 
             id: activePopup,
             onClose: handleClose,
-            burgerData: ActivePopup?.type?.name?.includes('Burger') ? burgerData : ''
+            burgerData
          }
       );
 
