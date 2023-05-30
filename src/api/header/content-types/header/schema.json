@@ -48,6 +48,16 @@
         }
       },
       "component": "common.contact-item"
+    },
+    "phone": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "common.contact-item"
     }
   }
 }
