@@ -80,7 +80,7 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
     }
 
     return (
-        <div className="md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 p-[13px] max-w-[270px] mx-auto md:mx-[unset] lg:h-full calculator-table-container">
+        <div className="md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 p-[13px] max-w-[270px] md:max-w-[unset] mx-auto md:mx-[unset] lg:h-full calculator-table-container">
             <div className="flex flex-col md:flex-row lg:flex-col  md:max-h-[unset] md:max-w-[unset] calculator-table max-h-[440px] relative w-full">
                 <div className="flex flex-col md:pr-[18px] lg:pr-0 basis-[50%] lg:basis-[unset]">
                     <div className="flex items-center justify-between lg:justify-start mb-[10px] lg:mb-[15px]">
