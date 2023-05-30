@@ -151,15 +151,15 @@ const OrderWithFilePopup: FC<any> = (props) => {
     }, [watchFileRadio, setValue]);
 
     return (    
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="pb-[15px] relative">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[315px] md:w-auto">
+            <div className="pb-[10px] md:pb-[15px] relative">
                 <div className="flex justify-between items-center">
                     <label htmlFor={`${props?.id}-name`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Ваше ім'я"}</label>
                     <input className="input font-[600] leading-[1.2] py-[8.5px] px-[15px] text-black border-black border-[1px] rounded-[15px] outline-none text-[14px] w-full max-w-[173px]" type="text" placeholder="Введіть ваше ім'я" id={`${props?.id}-name`} {...register("name")} />
                 </div>
-                <p className="text-danger absolute right-0 bottom-0">{errors?.name?.message}</p>
+                <p className="text-danger absolute right-0 bottom-[-2px] md:bottom-0">{errors?.name?.message}</p>
             </div>
-            <div className="pb-[35px] relative">
+            <div className="pb-[20px] md:pb-[35px] relative">
                 <div className="flex justify-between items-center">
                     <label htmlFor={`${props?.id}-phonenum`} className="mr-[10px] text-black font-[600] tracking-[0.1em] leading-[1.2] cursor-pointer">{"Телефон"}</label>
                     <div className="flex items-center">
@@ -179,12 +179,12 @@ const OrderWithFilePopup: FC<any> = (props) => {
                     </div>
                     
                 </div>
-                <p className="text-danger absolute right-0 bottom-[20px]">{errors?.phonenum?.message}</p>
+                <p className="text-danger absolute right-0 bottom-[7px] md:bottom-[20px]">{errors?.phonenum?.message}</p>
             </div>
             <div>
                 <fieldset className="mb-[35px]">
                     <div>
-                        <div className="flex items-center mb-[15px]">
+                        <div className="flex items-center mb-[10px] md:mb-[15px]">
                             
                             <input type="radio" id={`${props?.id}-file`} value="Файл" {...register("file-radio")} className="mr-[12px]"/>
                             <label htmlFor={`${props?.id}-file`} className="block w-full">

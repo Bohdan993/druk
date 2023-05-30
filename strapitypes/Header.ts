@@ -11,6 +11,7 @@ export interface IHeader<Populate extends string | never = never> {
       logo?: { data: IMedia | null };
       social?: ICommonSocials<ExtractNested<Populate, "social">>[];
       menu?: ICommonContactItem<ExtractNested<Populate, "menu">>[];
+      phone?: ICommonContactItem<ExtractNested<Populate, "phone">> | null;
       publishedAt: string;
       createdAt: string;
       updatedAt: string;

@@ -15,8 +15,6 @@ import TabletBurger from "./TabletBurger";
 import MobileBurger from "./MobileBurger";
 
 
-
-
 type PopupsData = {
     [key in keyof PopupsType]: ReactNode
 }
@@ -33,7 +31,7 @@ const popups: PopupsData = {
 }
 
 type PopupsProps = {
-    burgerData: IHeader["attributes"]["menu"];
+    burgerData: {menu:  IHeader["attributes"]["menu"], phone:  IHeader["attributes"]["phone"], social:  IHeader["attributes"]["social"]};
 }
 
 const Popups: FC<PopupsProps> = ({burgerData}) => {
@@ -54,15 +52,12 @@ const Popups: FC<PopupsProps> = ({burgerData}) => {
         { 
             id: activePopup,
             onClose: handleClose,
-            burgerData
+            burgerData: ActivePopup?.type?.name?.includes('Burger') ? burgerData : ''
          }
       );
 
     const isSomePopupVisible = Object.values(popupsState).some(Boolean);
     
-
-
-
     useEffect(()=>{
         if(isSomePopupVisible) {
             document.body.classList.add("overflow-hidden", "w-full");

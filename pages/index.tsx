@@ -42,9 +42,7 @@ type HomePageProps = {
 }
 
 const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle, clues}) => {
-
-  // console.log(header);
-
+  console.log(header);
   return (
     <>
       <Header data={header}/>
@@ -54,7 +52,7 @@ const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, heade
         <Faq data={faqs}/>
         <Testimonials data={testimonials}/>
         <About data={about}/>
-        <Popups burgerData={header?.attributes?.menu}/>   
+        <Popups burgerData={{menu: header?.attributes?.menu, phone: header?.attributes?.phone, social: header?.attributes?.social}}/>   
       </main>
       <Footer data={footer}/>
     </>

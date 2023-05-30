@@ -15,10 +15,8 @@ interface OrderStep {
     el: IClue['attributes']
 }
 
-const OrderStepItem: FC<OrderStep> = ({windowSize, el, id}) => {
-    console.log(el);
+const OrderStepItem: FC<OrderStep> = ({windowSize, el}) => {
     return (
-        // <></>
         <SplideSlide className={`cursor-pointer md:mr-[10px] last:mr-0 md:px-[15px] lg:px-[18px] justify-center items-center rounded-[15px] md:bg-skin-dark ${!el?.showontablets ? "flex md:hidden lg:flex" : "flex"}`} style={windowSize?.width! > 991 ? el?.customstyle : {}} data-tooltip-id={`order-steps-tooltip`} data-tooltip-html={makeTooltipMarkup({icon: infoIcon, tooltip: el?.clue, list: el?.clueslists})}>
             <div className="flex justify-center items-center">
                 {!el?.name  ? (

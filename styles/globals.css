@@ -451,6 +451,7 @@ body {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 20px;
+  height: auto!important;
 }
 
 /* textarea::-moz-placeholder, */
@@ -823,6 +824,9 @@ input[type="radio"]:checked::before {
   background-color: #D9D9D9!important;
 }
 
+.react-tooltip {
+  font-size: 100%;
+}
 
 @media screen and (min-width: 768px) {
   .rotor-carousel .splide__list {
@@ -1145,6 +1149,7 @@ input[type="radio"]:checked::before {
   #order-steps-tooltip-order-with-file,
   #order-steps-tooltip-order-without-file {
     color: #262626;
+    padding: 16px 25px;
   }
 
   .showTestimonialsPopup .rodal-dialog {
@@ -1283,5 +1288,25 @@ input[type="radio"]:checked::before {
   {
     border-radius: 19px;
     background-color: #F4E1BF;
+  }
+
+  .quantity-slide .quantity-input-container{
+    justify-content: center;
+  }
+
+  .quantity-slide .quantity-input-container .quantity-input {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 22.5px 0;
+    border-radius: 30px;
+  }
+
+  .quantity-slide .quantity-input-container svg{
+    width: 22.5px;
+    height: 52.5px;
+  }
+
+  .order-steps-tooltip-text {
+    font-size: 1rem;
   }
 }

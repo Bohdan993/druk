@@ -22,6 +22,11 @@ class HeaderApi {
                             image: true
                         }
                     },
+                    phone: {
+                        populate: {
+                            image: true
+                        }
+                    },
                     logo: true
                 }
             },
