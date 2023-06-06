@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "constructors",
+  "collectionName": "constructorsingles",
   "info": {
-    "singularName": "constructor",
-    "pluralName": "constructors",
-    "displayName": "Конструктор",
-    "description": ""
+    "singularName": "constructorsingle",
+    "pluralName": "constructorsingles",
+    "displayName": "Конструктор"
   },
   "options": {
     "draftAndPublish": true
@@ -23,6 +22,7 @@
         }
       },
       "type": "string",
+      "unique": true,
       "required": true
     }
   }
