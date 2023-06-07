@@ -15,7 +15,7 @@ import { MyExtension } from '@/utils/splideExtension';
 import { IClue } from '@/strapitypes/Clue';
 import { makeTooltipMarkup } from '@/utils/makeTooltipMarkup';
 import infoIcon from "@/public/icon-info-2.svg";
-import { IConstructor } from '@/strapitypes/Constructor';
+import { IConstructorsingle } from '@/strapitypes/Constructorsingle';
 
 
 const sliderOptions: Options = {
@@ -37,7 +37,7 @@ const sliderOptions: Options = {
 
 type CalculatorProps = {
     data: IClue[];
-    dataSingle: IConstructor;
+    dataSingle: IConstructorsingle;
 }
 
 const Calculator: FC<CalculatorProps> = ({data, dataSingle}) => {

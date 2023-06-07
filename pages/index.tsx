@@ -25,7 +25,7 @@ import { IClue } from '@/strapitypes/Clue';
 import { cluesApi } from "@/fetch/clues-api";
 import { IFaqsingle } from './../strapitypes/Faqsingle';
 import { rotorsApi } from "@/fetch/rotors-api";
-import { IConstructor } from './../strapitypes/Constructor';
+import { IConstructorsingle } from '@/strapitypes/Constructorsingle';
 import { ITestimonialsingle } from './../strapitypes/Testimonialsingle';
 
 
@@ -34,7 +34,7 @@ import { ITestimonialsingle } from './../strapitypes/Testimonialsingle';
 
 
 type HomePageProps = {
-  constructorSingle: IConstructor;
+  constructorSingle: IConstructorsingle;
   faqs: FaqType[];
   faqsSingle: IFaqsingle;
   about: any;

@@ -3,11 +3,11 @@
 import qs from 'qs';
 import { Rotor } from '../types/rotors';
 import { baseUrlApi as baseUrl} from '@/constants';
-import { IConstructor } from './../strapitypes/Constructor';
+import { IConstructorsingle } from '@/strapitypes/Constructorsingle';
 
 
 type GetRotorsResponse = Promise<Rotor[]>;
-type GetConstructorSingleResponce = Promise<IConstructor>
+type GetConstructorSingleResponce = Promise<IConstructorsingle>
 
 class RotorsApi {
     async getRotors() : GetRotorsResponse {
