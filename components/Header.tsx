@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({data}) => {
     }
 
     return (
-        <header id="header" className="header bg-natural-green h-[88px] md:h-[60px] shadow-[4px_4px_10px_rgba(38,38,38,0.2)] relative z-20">
+        <header id="header" className="header bg-natural-green h-[88px] md:h-[60px] shadow-[4px_4px_10px_rgba(38,38,38,0.2)] relative z-10">
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px] flex justify-between items-end md:items-center h-full relative py-[6px]">
                 <div className="logo-container  bg-natural-green px-[15px] md:px-[30px] pb-[15px] md:pb-[32px] pt-[45px] md:pt-[22px] rounded-b-[20px] md:max-w-[165px] max-w-[118px] absolute top-0 w-full left-[0px] md:left-auto">
                     <Image src={baseUrl + data?.attributes?.logo?.data?.attributes?.url} width={data?.attributes?.logo?.data?.attributes?.width as number} height={data?.attributes?.logo?.data?.attributes?.height as number} alt="Logo"/>

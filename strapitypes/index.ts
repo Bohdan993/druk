@@ -6,7 +6,7 @@ export * from "./builtins/ExtractFlat";
 export * from "./About";
 export * from "./Application";
 export * from "./Clue";
-export * from "./Constructor";
+export * from "./Constructorsingle";
 export * from "./Faq";
 export * from "./Faqsingle";
 export * from "./Footer";

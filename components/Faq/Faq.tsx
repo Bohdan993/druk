@@ -1,13 +1,15 @@
 import {FC, Fragment, useState, MouseEvent} from 'react';
 import FaqItem from './FaqItem';
 import type { Faq as FaqType } from "@/types/faq";
+import { IFaqsingle } from '@/strapitypes/Faqsingle';
 
 
 type FaqProps = {
-    data: FaqType[]
+    data: FaqType[];
+    dataSingle: IFaqsingle;
 } 
 
-const Faq: FC<FaqProps> = ({data}) => {
+const Faq: FC<FaqProps> = ({data, dataSingle}) => {
     const [faqItems, setFaqItems] = useState<FaqType[]>(data);
 
     const handleClick = (id: number, e: MouseEvent<HTMLDivElement>) => {
@@ -27,8 +29,8 @@ const Faq: FC<FaqProps> = ({data}) => {
     }
 
     return (
-        <div className="faq bg-skin-dark  py-[45px] md:py-[60px] lg:py-[75px]">
-            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[50px] px-[10px]">Поширені запитання</h2>
+        <div className="faq bg-skin-dark  py-[45px] md:py-[60px] lg:py-[75px]" id={dataSingle?.attributes?.sectionid || "#"}>
+            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[50px] px-[10px]">{dataSingle?.attributes?.title}</h2>
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
                 <div>
                     {

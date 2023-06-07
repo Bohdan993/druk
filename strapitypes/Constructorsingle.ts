@@ -1,4 +1,4 @@
-export interface IConstructor {
+export interface IConstructorsingle {
   id: number;
   attributes: {
     sectionid: string | null;

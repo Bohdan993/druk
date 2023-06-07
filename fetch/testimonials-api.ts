@@ -1,12 +1,17 @@
+
 // @ts-ignore
 import qs from 'qs';
 import { baseUrlApi as baseUrl} from '@/constants';
 import { TestimonialItem, Testimonial } from '../types/testimonial';
+import { ITestimonialsingle } from './../strapitypes/Testimonialsingle';
+
+
 
 
 type GetTestimonialsResponse = Promise<Testimonial[]>;
 type PostTestimonialsResponse = Promise<TestimonialItem>;
 type PostTestimonialRequest = TestimonialItem;
+type GetTestimonialsSingleResponse = Promise<ITestimonialsingle>;
 
 class TestimonialsApi {
     async getTestimonials() : GetTestimonialsResponse {
@@ -96,6 +101,38 @@ class TestimonialsApi {
 
     }
 
+    async getTestimonialsSingle() : GetTestimonialsSingleResponse  {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await fetch(`${baseUrl}/testimonialsingle`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
+                })
+        
+                if(!res.ok && res.status!==200)
+                {
+                    throw new Error(String(res.status));
+                }
+        
+                const testimonial = await res.json();
+        
+                if (!testimonial) {
+                    reject(new Error('Виникла помилка при з\'єднання з сервером'));
+                    return;
+                }
+
+               resolve(testimonial?.data);
+
+            } catch (err) {
+                console.error('[Api]: ', err);
+                reject(new Error('Internal server error'));
+            }
+        });
+
+    }
 }
 
 export const testimonialsApi = new TestimonialsApi();

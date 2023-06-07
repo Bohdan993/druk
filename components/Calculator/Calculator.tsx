@@ -15,6 +15,7 @@ import { MyExtension } from '@/utils/splideExtension';
 import { IClue } from '@/strapitypes/Clue';
 import { makeTooltipMarkup } from '@/utils/makeTooltipMarkup';
 import infoIcon from "@/public/icon-info-2.svg";
+import { IConstructor } from '@/strapitypes/Constructor';
 
 
 const sliderOptions: Options = {
@@ -35,10 +36,11 @@ const sliderOptions: Options = {
 };
 
 type CalculatorProps = {
-    data: IClue[]
+    data: IClue[];
+    dataSingle: IConstructor;
 }
 
-const Calculator: FC<CalculatorProps> = ({data}) => {
+const Calculator: FC<CalculatorProps> = ({data, dataSingle}) => {
 
     const rotorSliderRef = useRef<Splide| null>(null);
     const orderStepsSliderRef = useRef<Splide| null>(null);
@@ -69,7 +71,7 @@ const Calculator: FC<CalculatorProps> = ({data}) => {
   }, [rotorSliderRef,  orderStepsSliderRef]);
 
     return (
-        <div className="calculator bg-skin-dark md:h-auto overflow-x-hidden">
+        <div className="calculator bg-skin-dark md:h-auto overflow-x-hidden" id={dataSingle?.attributes?.sectionid || "#"}>
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px] relative h-full md:h-auto">
                 <div className="md:relative ml-[185px] static">
                     <OrderSteps sliderRef={orderStepsSliderRef} data={data}/>

@@ -80,7 +80,7 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
     }
 
     return (
-        <div className="md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 p-[13px] max-w-[270px] md:max-w-[unset] mx-auto md:mx-[unset] lg:h-full calculator-table-container">
+        <div className="md:px-[50px] md:py-[12px] lg:px-0 lg:py-0 p-[13px] max-w-[270px] md:max-w-[unset] mx-auto md:mx-[unset] lg:h-full calculator-table-container w-full">
             <div className="flex flex-col md:flex-row lg:flex-col  md:max-h-[unset] md:max-w-[unset] calculator-table max-h-[440px] relative w-full">
                 <div className="flex flex-col md:pr-[18px] lg:pr-0 basis-[50%] lg:basis-[unset]">
                     <div className="flex items-center justify-between lg:justify-start mb-[10px] lg:mb-[15px]">
@@ -107,7 +107,7 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
                                     <div className="flex items-center lg:justify-start justify-between mb-[10px] lg:mb-[15px] md:last:mb-0 lg:last:mb-[15px]" key={rotor?.id}>
                                         <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 lg:basis-[50%] mr-[8px] text-[0.876rem] md:text-[1rem]">{rotor?.attributes?.title}</p>
                                         <div className="lg:basis-[50%] lg:flex">
-                                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex">{rotor?.attributes?.rotorpiece.find(rp => rp?.active)?.text}</div>
+                                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex whitespace-nowrap">{rotor?.attributes?.rotorpiece.find(rp => rp?.active)?.text}</div>
                                         </div>
                                     </div> 
                                 )
@@ -121,7 +121,7 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
                     <div className="flex items-center lg:justify-start justify-between mb-[10px] lg:mb-[15px]">
                         <p className="font-[600] leading-[1.2] tracking-[0.2em] text-black-2 mr-[8px] lg:basis-[50%] text-[0.876rem] md:text-[1rem]">Вартість 1 од.</p>
                         <div className="lg:basis-[50%]">
-                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex">{subTotalContent} грн.</div>
+                            <div className="font-[600] text-[0.875rem]  md:text-[1rem] leading-[1.2] tracking-[0.2em] text-black-2 rounded-[20px] border-[1px] border-natural-green px-[16px] py-[13.5px] lg:px-[30px] lg:py-[10px] md:px-[20px] md:py-[15px] text-center inline-flex whitespace-nowrap">{subTotalContent} грн.</div>
                         </div>
                     </div> 
                     {rotorsState?.map(rotor => {

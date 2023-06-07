@@ -60,10 +60,10 @@ class GalleryApi {
             try {
                 const res = await fetch(`${baseUrl}/gallerysingle`, {
                 method: "GET",
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'accept': 'application/json'
-                // },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
                 })
         
                 if(!res.ok && res.status!==200)

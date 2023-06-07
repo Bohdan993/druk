@@ -173,6 +173,7 @@ body {
 /* Note: backdrop-filter has minimal browser support */
   border-radius: 20px;
   padding: 10px;
+  z-index: 99;
 }
 
 .order-steps-tooltip-text {

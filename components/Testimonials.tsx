@@ -13,6 +13,7 @@ import { useAppDispatch } from "@/store";
 import { Testimonial } from './../types/testimonial';
 import { formatDate } from "@/utils/formatDate";
 import type {Raiting} from "../types/testimonial";
+import { ITestimonialsingle } from '@/strapitypes/Testimonialsingle';
 
 
 const sliderOptions: Options = {
@@ -39,7 +40,8 @@ const sliderOptions: Options = {
 
 
 type TestimonialsProps = {
-    data: Testimonial[]
+    data: Testimonial[];
+    dataSingle: ITestimonialsingle;
 }
 
 const raiting: {[key in Raiting]: number} = {
@@ -50,7 +52,7 @@ const raiting: {[key in Raiting]: number} = {
     "П'ять": 5,
 }
 
-const Testimonials: FC<TestimonialsProps> = ({data}) => {
+const Testimonials: FC<TestimonialsProps> = ({data, dataSingle}) => {
 
     const dispatch = useAppDispatch();
     const handleClick = () => {
@@ -58,8 +60,8 @@ const Testimonials: FC<TestimonialsProps> = ({data}) => {
     }
 
     return (
-        <div className="testimonials bg-light-green  py-[45px] md:py-[60px] lg:py-[75px]">
-            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] px-[10px]">Відгуки клієнтів</h2>
+        <div className="testimonials bg-light-green  py-[45px] md:py-[60px] lg:py-[75px]" id={dataSingle?.attributes?.sectionid || "#"}>
+            <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] px-[10px]">{dataSingle?.attributes?.title}</h2>
             <div className="container m-auto px-[0] sm:px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
                 <div>
                     <Splide hasTrack={false} className="testimonials-carousel" aria-label="Books gallery" options={sliderOptions}>

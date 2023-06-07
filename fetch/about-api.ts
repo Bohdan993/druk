@@ -67,6 +67,8 @@ class AboutApi {
 
     }
 
+    
+
 }
 
 export const aboutApi = new AboutApi();

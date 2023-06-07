@@ -23,7 +23,10 @@ import { IGallery } from './../strapitypes/Gallery';
 import { galleryApi } from "@/fetch/gallery-api";
 import { IClue } from '@/strapitypes/Clue';
 import { cluesApi } from "@/fetch/clues-api";
-
+import { IFaqsingle } from './../strapitypes/Faqsingle';
+import { rotorsApi } from "@/fetch/rotors-api";
+import { IConstructor } from './../strapitypes/Constructor';
+import { ITestimonialsingle } from './../strapitypes/Testimonialsingle';
 
 
 
@@ -31,26 +34,29 @@ import { cluesApi } from "@/fetch/clues-api";
 
 
 type HomePageProps = {
+  constructorSingle: IConstructor;
   faqs: FaqType[];
+  faqsSingle: IFaqsingle;
   about: any;
   footer: any;
   testimonials: any;
-  header:IHeader;
+  testimonialsSingle: ITestimonialsingle;
+  header: IHeader;
   gallery: IGallery[],
   gallerySingle:IGallerysingle,
   clues: IClue[]
 }
 
-const Home: NextPage<HomePageProps> = ({faqs, about, footer, testimonials, header, gallery, gallerySingle, clues}) => {
+const Home: NextPage<HomePageProps> = ({constructorSingle, faqs, faqsSingle, about, footer, testimonials, testimonialsSingle, header, gallery, gallerySingle, clues}) => {
 
   return (
     <>
       <Header data={header}/>
       <main>
-        <Calculator data={clues}/>
+        <Calculator data={clues} dataSingle={constructorSingle}/>
         <Gallery data={gallery} dataSingle={gallerySingle}/>
-        <Faq data={faqs}/>
-        <Testimonials data={testimonials}/>
+        <Faq data={faqs} dataSingle={faqsSingle}/>
+        <Testimonials data={testimonials} dataSingle={testimonialsSingle}/>
         <About data={about}/>
         <Popups burgerData={{menu: header?.attributes?.menu, phone: header?.attributes?.phone, social: header?.attributes?.social}}/>   
       </main>
@@ -67,11 +73,14 @@ export const getServerSideProps =  wrapper.getServerSideProps(
       //   'Cache-Control',
       //   'public, s-maxage=10, stale-while-revalidate=59',
       // );
-      const [faqs, about, footer, testimonials, header, gallery, gallerySingle, clues]  = await Promise.all([
+      const [constructorSingle, faqs, faqsSingle, about, footer, testimonials, testimonialsSingle, header, gallery, gallerySingle, clues]  = await Promise.all([
+        rotorsApi.getConstructorSingle(),
         faqsApi.getFaqs(), 
+        faqsApi.getFaqsSingle(),
         aboutApi.getAbout(), 
         footerApi.getFooter(),
         testimonialsApi.getTestimonials(),
+        testimonialsApi.getTestimonialsSingle(),
         headerApi.getHeader(),
         galleryApi.getGallery(),
         galleryApi.getGallerySingle(),
@@ -84,10 +93,13 @@ export const getServerSideProps =  wrapper.getServerSideProps(
 
       return {
         props: {
+          constructorSingle,
           faqs,
+          faqsSingle,
           about,
           footer,
           testimonials,
+          testimonialsSingle,
           header,
           gallery,
           gallerySingle,

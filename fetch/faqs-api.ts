@@ -1,10 +1,12 @@
+import { IFaqsingle } from './../strapitypes/Faqsingle';
 import { FaqItem } from '../types/faq';
 import { baseUrlApi as baseUrl} from '@/constants';
 
 
 
+
 type GetFaqsResponse = Promise<FaqItem[]>;
-type GetFaqsSingleResponse = Promise<any>;
+type GetFaqsSingleResponse = Promise<IFaqsingle>;
 
 class FaqsApi {
     async getFaqs() : GetFaqsResponse {
@@ -44,7 +46,7 @@ class FaqsApi {
     async getFaqsSingle() : GetFaqsSingleResponse  {
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/faqs`, {
+                const res = await fetch(`${baseUrl}/faqsingle`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',

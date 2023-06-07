@@ -13,7 +13,7 @@ type AboutProps = {
 
 const About: FC<AboutProps> = ({data}) => {
     return (
-        <div className="about bg-skin-light py-[45px] md:py-[60px] lg:py-[75px]">
+        <div className="about bg-skin-light py-[45px] md:py-[60px] lg:py-[75px]" id={data?.attributes?.sectionid || "#"}>
             <h2 className="text-center font-bold leading-[1.2] tracking-[0.2em] text-black text-[2.25rem] md:text-[3rem] mb-[50px] px-[10px]">{data?.attributes?.title}</h2>
             <div className="container m-auto px-[10px] md:px-[50px] lg:px-[55px] xl:px-[60px] w-full max-w-[1290px]">
                 <article className="flex justify-between items-start mb-[45px] flex-wrap lg:flex-nowrap">
