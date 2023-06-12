@@ -15,6 +15,8 @@ const OrderButtons: FC = () => {
     const handleClick = () => {
         if(size?.width! >= 768) {
             dispatch(setShowPopup({key: "showOrderWithFilePopup", state: true}));
+        } else {
+            dispatch(setShowPopup({key: "showOrderWithFilePopupResponsive", state: true}));
         }
         
     }
@@ -22,7 +24,10 @@ const OrderButtons: FC = () => {
     const handleClick2 = () => {
         if(size?.width! >= 768) {
             dispatch(setShowPopup({key: "showOrderWithoutFilePopup", state: true}));
+        } else {
+            dispatch(setShowPopup({key: "showOrderWithoutFilePopupResponsive", state: true}));
         }
+
     }
     return (
         <div>

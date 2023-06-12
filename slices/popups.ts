@@ -16,7 +16,9 @@ const initialState: Popups = {
     showOrderThanksPopup: false,
     showFailPopup: false,
     showBurgerTabletPopup: false,
-    showBurgerMobilePopup: false
+    showBurgerMobilePopup: false,
+    showOrderWithFilePopupResponsive: false,
+    showOrderWithoutFilePopupResponsive: false
 };
 
 export const slice = createSlice({

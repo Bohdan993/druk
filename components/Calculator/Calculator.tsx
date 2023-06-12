@@ -77,14 +77,14 @@ const Calculator: FC<CalculatorProps> = ({data, dataSingle}) => {
                     <OrderSteps sliderRef={orderStepsSliderRef} data={data}/>
                 </div>
                 <div className="md:flex justify-between items-stretch">
-                    <div className="basis-[100%] lg:basis-[65.59%] md:pt-[109px] md:mr-[37.5px] md:pb-[65px]">
+                    <div className="basis-[100%] lg:basis-[65.59%] md:pt-[109px] md:mr-[22px] md:pb-[65px]">
                         <Splide extensions={{MyExtension}} ref={(slider) => (rotorSliderRef.current = slider)} className="rotor-carousel " aria-label="Books gallery" options={sliderOptions} hasTrack={false}>
                             <SplideTrack>
                                 {rotorsState?.map((rotor, i) => {
                                     index = i;
                                     return (
-                                        <SplideSlide key={rotor.id}>
-                                            <div className="basis-[33%] md:mx-[5px] shrink relative">
+                                        <SplideSlide key={rotor.id} className="basis-[100%] md:basis-[33%] lg:basis-[50%] xl:basis-[33%]">
+                                            <div className="md:mx-[5px] relative">
                                                 <RotorWrapper
                                                     w={185}
                                                     h={185}
@@ -137,7 +137,7 @@ const Calculator: FC<CalculatorProps> = ({data, dataSingle}) => {
                             </SplideTrack>
                         </Splide>
                     </div>
-                    <div className={`lg:pl-[40px] lg:pr-[20px] lg:py-[5px] bg-white-glass rounded-[20px] border-natural-green lg:w-auto lg:ml-[37.5px] lg:basis-[34.41%] lg:pt-[116px] lg:pb-[85px] absolute right-0 bottom-0 lg:static backdrop-blur-[15px] hidden md:flex calculator-table-container lg:translate-x-0 transition-transform duration-[0.25s] ease-in ${show ? "translate-x-0" : "translate-x-[calc(100%-190px)]"}`}>
+                    <div className={`lg:pl-[40px] lg:pr-[20px] lg:py-[5px] bg-white-glass rounded-[20px] border-natural-green lg:w-auto lg:ml-[22px] lg:basis-[34.41%] lg:pt-[116px] lg:pb-[85px] absolute right-0 bottom-0 lg:static backdrop-blur-[15px] hidden md:flex calculator-table-container lg:translate-x-0 transition-transform duration-[0.25s] ease-in ${show ? "translate-x-0" : "translate-x-[calc(100%-190px)]"}`}>
                         <div className="flex items-center justify-center bg-fiolet rounded-tl-[15px] p-[10px] rounded-bl-[15px] calculator-table-opener lg:hidden" onClick={handleClick}>
                             <p className="font-bold text-skin-light leading-[1.2] tracking-[0.2em] mr-[8px]">Замовити</p>
                             <svg

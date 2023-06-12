@@ -56,7 +56,7 @@ const Popups: FC<PopupsProps> = ({burgerData}) => {
          }
       );
 
-    const isSomePopupVisible = Object.values(popupsState).some(Boolean);
+    const isSomePopupVisible = Object.entries(popupsState).filter((el) => !el[0].includes('Responsive')).some(el => el[1] === true);
     
     useEffect(()=>{
         if(isSomePopupVisible) {
@@ -64,7 +64,7 @@ const Popups: FC<PopupsProps> = ({burgerData}) => {
         } else {
             document.body.classList.remove("overflow-hidden", "w-full");
         }
-    }, [isSomePopupVisible])
+    }, [isSomePopupVisible]);
 
     return (
         <div className="popups">

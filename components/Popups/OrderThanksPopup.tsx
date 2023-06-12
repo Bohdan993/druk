@@ -21,7 +21,7 @@ const OrderThanksPopup: FC<any> = ({onClose}) => {
                 <p className="text-center leading-[1.2] tracking-[0.2em] font-[500] text-black-2">{"Дякуємо за довіру."}</p>
             </div>
             <div className="w-full flex justify-center">
-                <a href="#header" onClick={onClose} className="popup-btn-1 max-w-[303px!important]">Повернутися на головну</a>
+                <a href="#header" onClick={onClose} className="popup-btn-1 text-center max-w-[303px!important]">Повернутися на головну</a>
             </div>
         </div>
     )

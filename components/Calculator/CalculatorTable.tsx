@@ -143,11 +143,11 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
                     <div className="mt-auto block lg:hidden">
                     {
                         typeof totalContent === 'number' ? (
-                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.25rem] text-black-2 flex justify-between items-center">
-                                Вартість:
-                                <span className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-natural-green lg:text-fiolet ml-[8px] text-center">
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.25rem] text-black-2 flex justify-between items-center whitespace-nowrap">
+                                Вартість: <span className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-natural-green lg:text-fiolet ml-[8px] text-center whitespace-nowrap">
                                     {totalContent} грн.
                                 </span>
+
                             </p>
                         ) :
                         (
@@ -161,7 +161,7 @@ const CalculatorTable: FC<QuantityInputProps> = ({quantity, handleQuantityChange
                 <div className="mt-auto hidden lg:block">
                     {
                         typeof totalContent === 'number' ? (
-                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2">
+                            <p className="font-bold leading-[1.2] tracking-[0.2em] text-[1.5rem] text-black-2 whitespace-nowrap">
                                 Вартість :<span className="pl-[32px] font-bold leading-[1.2] tracking-[0.2em] text-[2rem] text-natural-green lg:text-fiolet">
                                     {totalContent} грн.
                                     </span>

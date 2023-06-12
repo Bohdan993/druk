@@ -11,7 +11,7 @@ const TestimonialsThanksPopup: FC<any> = ({onClose}) => {
                 </p>
             </div>
             <div className="w-full flex justify-center">
-                <a href="#header" onClick={onClose} className="popup-btn-1 max-w-[303px!important]">Повернутися на головну</a>
+                <a href="#header" onClick={onClose} className="popup-btn-1 text-center max-w-[303px!important]">Повернутися на головну</a>
             </div>
         </div>
     )

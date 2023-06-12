@@ -6,5 +6,7 @@ export interface Popups {
     showOrderThanksPopup: boolean,
     showFailPopup: boolean,
     showBurgerTabletPopup: boolean,
-    showBurgerMobilePopup: boolean
+    showBurgerMobilePopup: boolean,
+    showOrderWithFilePopupResponsive?: boolean,
+    showOrderWithoutFilePopupResponsive?: boolean
 } 
