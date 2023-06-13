@@ -102,9 +102,28 @@ class TestimonialsApi {
     }
 
     async getTestimonialsSingle() : GetTestimonialsSingleResponse  {
+        const query = qs.stringify( 
+            {
+                populate: {
+                    button: {
+                        populate: {
+                            image: true
+                        }
+                    },
+                    button2: {
+                        populate: {
+                            image: true
+                        }
+                    }
+                }
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        );
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await fetch(`${baseUrl}/testimonialsingle`, {
+                const res = await fetch(`${baseUrl}/testimonialsingle?${query}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',

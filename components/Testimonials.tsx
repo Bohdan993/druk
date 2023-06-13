@@ -14,6 +14,7 @@ import { Testimonial } from './../types/testimonial';
 import { formatDate } from "@/utils/formatDate";
 import type {Raiting} from "../types/testimonial";
 import { ITestimonialsingle } from '@/strapitypes/Testimonialsingle';
+import { baseUrl } from "@/constants";
 
 
 const sliderOptions: Options = {
@@ -147,18 +148,18 @@ const Testimonials: FC<TestimonialsProps> = ({data, dataSingle}) => {
                             </button>
                         </div>
                         <div className="testimonials-btn basis-[40%] md:basis-[auto] flex justify-end lg:mx-[10px] md:mx-[6.5px] md:block mr-[19px]">
-                            <a href="#" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px]  ">
-                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">Відгуки в Facebook</p>
+                            <a href={dataSingle?.attributes?.button?.link!} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px]  ">
+                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">{dataSingle?.attributes?.button?.name}</p>
                                 <span>
-                                    <Image src={fbIcon} alt="Plus Icon" className="rounded-[15px] min-w-[50px]"/>
+                                    <Image src={baseUrl + dataSingle?.attributes?.button?.image?.data?.attributes?.url} width={dataSingle?.attributes?.button?.image?.data?.attributes?.width!} height={dataSingle?.attributes?.button?.image?.data?.attributes?.height!} alt="Social Icon" className="rounded-[15px] min-w-[50px]"/>
                                 </span>
                             </a>
                         </div>
                         <div className="testimonials-btn basis-[40%] md:basis-[auto] flex justify-start lg:mx-[10px] md:mx-[6.5px] md:block ml-[19px] md:mr-0">
-                            <a href="#" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px] ">
-                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">Відгуки в Google</p>
+                            <a href={dataSingle?.attributes?.button2?.link!} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center px-[30px] py-[10px] bg-skin-light rounded-[20px] ">
+                                <p className="font-[600] text-[1.125rem] text-black leading-[1.2] tracking-[0.1em] mr-[25px] transition-color duration-[0.25s] ease-in text-center hidden lg:block">{dataSingle?.attributes?.button2?.name}</p>
                                 <span >
-                                    <Image src={googleIcon} alt="Plus Icon" className="min-w-[50px]" />
+                                    <Image src={baseUrl + dataSingle?.attributes?.button2?.image?.data?.attributes?.url} width={dataSingle?.attributes?.button2?.image?.data?.attributes?.width!} height={dataSingle?.attributes?.button2?.image?.data?.attributes?.height!} alt="Social Icon" className="min-w-[50px]" />
                                 </span>
                             </a>
                         </div>

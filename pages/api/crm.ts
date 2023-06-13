@@ -2,10 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { CRMData } from './../../types/crm';
 
-
-
 async function postCRM(data: CRMData) {
-    const token: string = 'MzNjMWFiNmVjNDFlNGU5MzExNDNlNTAxMmU2YmY4MDYyNmU0NGZmMA';
     return new Promise(async (resolve, reject) => {
         try {
             const res = await fetch(`https://openapi.keycrm.app/v1/order`, {
@@ -13,7 +10,7 @@ async function postCRM(data: CRMData) {
                 headers: {
                     'Content-Type': 'application/json',
                     'accept': 'application/json',
-                    'Authorization':  'Bearer ' + token
+                    'Authorization':  'Bearer ' + process.env.CRM_TOKEN
                 },
                 body: JSON.stringify({
                     "source_id": 1,

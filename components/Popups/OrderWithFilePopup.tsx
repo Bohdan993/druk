@@ -9,6 +9,7 @@ import { Dropzone } from "../Helpers/Dropzone";
 import { orderApi } from "@/fetch/order-api";
 import {FileWithPath} from 'react-dropzone';
 import { crmApi } from "@/fetch/crm-api";
+import { baseUrl } from "@/constants";
 
 
 
@@ -132,10 +133,8 @@ const OrderWithFilePopup: FC<any> = (props) => {
                 file: file || "",
             });
 
-            // console.log(result);
-
-            // const fileInfo = await orderApi.getFileInfo();
-
+            const orderInfo: any = await orderApi.getOrder(result?.id);
+            
             await crmApi.postCRM({
                 name: data?.name || "",
                 bounding: data?.bounding,
@@ -145,7 +144,7 @@ const OrderWithFilePopup: FC<any> = (props) => {
                 phonenum: data?.phonenum || "",
                 phoneoperator: data?.phoneoperator || "",
                 url: data?.url || "",
-                file: "",
+                file: orderInfo?.file?.url ? baseUrl + orderInfo?.file?.url : "",
             });
 
             dispatch(setShowPopup({key: "showOrderThanksPopup", state: true}));

@@ -49,6 +49,41 @@ class OrderApi {
 
     }
 
+    async getOrder(id: number) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await fetch(`/api/order`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                       id
+                    })
+                })
+        
+                if(!res.ok && res.status!==200)
+                {
+                    throw new Error(String(res.status));
+                }
+        
+                const data = await res.json();
+        
+                if (!data) {
+                    reject(new Error('Виникла помилка при з\'єднання з сервером'));
+                    return;
+                }
+
+               resolve(data?.data);
+
+            } catch (err) {
+                console.error('[Api]: ', err);
+                reject(new Error('Internal server error'));
+            }
+        });
+    }
+
 }
 
 export const orderApi = new OrderApi();

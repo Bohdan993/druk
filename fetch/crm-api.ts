@@ -20,7 +20,7 @@ class CRMApi {
                         phonenum: data?.phonenum || "",
                         phoneoperator: data?.phoneoperator || "",
                         url: data?.url || "",
-                        file: "",
+                        file: data?.file || "",
                         bookname: data?.bookname || "", 
                         bookauthor: data?.bookauthor || ""
                     })
