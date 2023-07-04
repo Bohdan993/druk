@@ -16,6 +16,7 @@ import { IClue } from '@/strapitypes/Clue';
 import { makeTooltipMarkup } from '@/utils/makeTooltipMarkup';
 import infoIcon from "@/public/icon-info-2.svg";
 import { IConstructorsingle } from '@/strapitypes/Constructorsingle';
+import { Tooltip } from 'react-tooltip';
 
 
 const sliderOptions: Options = {
@@ -153,6 +154,15 @@ const Calculator: FC<CalculatorProps> = ({data, dataSingle}) => {
                             </svg>
                         </div>
                         <CalculatorTable quantity={quantity} handleQuantityChange={handleQuantityChange}/>
+                    </div>
+                    <div>
+                        <Tooltip 
+                            id="rotors-tooltip"
+                            noArrow={true}
+                            positionStrategy={"fixed"}
+                            place={"bottom"}
+                            closeOnEsc={true}
+                        />
                     </div>
                 </div>
             </div>

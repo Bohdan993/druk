@@ -19,7 +19,8 @@ class RotorsApi {
                         populate: {
                             image: {
                                 fields: ["url", "width", "height", "name"]
-                            }
+                            },
+                            cluesitem: true
                         }
                     }
                 },

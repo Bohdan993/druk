@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 
 
 
+
 type RotorWrapperProps = {
     cx: number;
     cy: number;
@@ -48,14 +49,14 @@ const RotorWrapper:FC<RotorWrapperProps> = ({cx, cy, r, w, h, type, data}) => {
     }
 
     return (
-        <Rotor 
-            cx={cx}
-            cy={cy}
-            r={r}
-            w={w}
-            h={h}
-            data={data}
-        />
+            <Rotor 
+                cx={cx}
+                cy={cy}
+                r={r}
+                w={w}
+                h={h}
+                data={data}
+            />
     );
 };
 

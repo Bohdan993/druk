@@ -1,5 +1,5 @@
 
-import {FC, Fragment, Ref, MutableRefObject, useEffect, useRef} from "react";
+import {FC, Fragment, Ref, MutableRefObject} from "react";
 import OrderStepItem from "./OrderStepItem";
 import { Size, useWindowSize } from "@/utils/useWindowSize";
 import { Tooltip } from 'react-tooltip';
@@ -76,8 +76,7 @@ const OrderSteps: FC<OrderStepsProps> = ({sliderRef, data}) => {
                     noArrow={true}
                     positionStrategy={"fixed"}
                     place={"bottom"}
-                    closeOnEsc={true}    
-                    
+                    closeOnEsc={true}
                 />
                 <Tooltip
                     id="order-steps-tooltip-order-with-file"

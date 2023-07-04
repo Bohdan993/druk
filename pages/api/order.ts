@@ -6,7 +6,7 @@ const url: string = process.env.ADMIN_URL!;
 async function login() {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await fetch(`${process.env.ADMIN_URL}/admin/login`, {
+            const res = await fetch(`${url}admin/login`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

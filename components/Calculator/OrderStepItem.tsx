@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import Image from "next/image";
-import type * as CSS from 'csstype';
 import { Size } from "@/utils/useWindowSize";
 import infoIcon from "@/public/icon-info-2.svg";
 import {SplideSlide } from '@splidejs/react-splide';

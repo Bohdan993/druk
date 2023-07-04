@@ -162,7 +162,8 @@ body {
 }
 
 
-#order-steps-tooltip {
+#order-steps-tooltip,
+#rotors-tooltip {
   z-index: 50;
   padding: 0;
   background: rgba(255, 255, 255, 0.3);
@@ -170,7 +171,6 @@ body {
   border: 1px solid #AEC670;
   box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.15), inset 0px 0px 60px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
-/* Note: backdrop-filter has minimal browser support */
   border-radius: 20px;
   padding: 10px;
   z-index: 99;
