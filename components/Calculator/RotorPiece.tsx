@@ -1,6 +1,6 @@
 import { degreesToRadians } from '@/utils/degreesToRadians';
 import { useRef, useState, useEffect, FC, MouseEvent} from 'react';
-import { IRotorRotorPiece as Rotorpiece} from '@/strapitypes/rotor/RotorPiece'
+import { Rotorpiece } from '@/types/rotors';
 import { baseUrl } from '@/constants';
 import { makeTooltipMarkup } from '@/utils/makeTooltipMarkup';
 import infoIcon from "@/public/icon-info-2.svg";

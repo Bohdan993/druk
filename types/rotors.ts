@@ -16,6 +16,7 @@ export interface Rotor {
     key: string
     text: string
     image?: Image
+    cluesitem?: CluesClueitem | null
   }
   
   export interface Image {
@@ -41,4 +42,10 @@ export interface Rotor {
     w: number
     h: number
     data: Rotor
+}
+
+export interface CluesClueitem {
+  id: number;
+  __component: "clues.clueitem";
+  clueitemtext: string | null;
 }
