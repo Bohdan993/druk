@@ -27,6 +27,11 @@
     "text": {
       "type": "string",
       "required": true
+    },
+    "cluesitem": {
+      "type": "component",
+      "repeatable": false,
+      "component": "clues.clueitem"
     }
   }
 }
