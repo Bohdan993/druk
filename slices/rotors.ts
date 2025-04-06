@@ -1,36 +1,30 @@
-import { AppState } from './../store/index';
-import { Rotor } from './../types/rotors';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+/** @format */
 
+import { AppState } from "./../store/index";
+import { Rotor } from "./../types/rotors";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface RotorsState {
-    rotors: Rotor[],
-    activeRotorsKeys: string[],
-    date: string,
-
-} 
+  rotors: Rotor[];
+  activeRotorsKeys: string[];
+  date: string;
+}
 
 const initialState: RotorsState = {
-    rotors: [],
-    activeRotorsKeys: [],
-    date: '',
+  rotors: [],
+  activeRotorsKeys: [],
+  date: "",
 };
 
 export const slice = createSlice({
-  name: 'rotors',
+  name: "rotors",
   initialState,
   reducers: {
-    getRotors(
-      state: RotorsState,
-      action: PayloadAction<Rotor[]>
-    ): void {
+    getRotors(state: RotorsState, action: PayloadAction<Rotor[]>): void {
       state.rotors = action.payload;
     },
-    updateRotor(
-      state: RotorsState,
-      action: PayloadAction<Rotor>
-    ): void {
+    updateRotor(state: RotorsState, action: PayloadAction<Rotor>): void {
       const rotor = action.payload;
 
       state.rotors = state.rotors.map((_rotor) => {
@@ -46,14 +40,12 @@ export const slice = createSlice({
       action: PayloadAction<string[]>
     ): void {
       state.activeRotorsKeys = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { reducer } = slice;
-export const { 
-  updateRotor,
-  setActiveRotorsKeys
-} = slice.actions;
+export const { updateRotor, setActiveRotorsKeys } = slice.actions;
 export const selectRotorsState = (state: AppState) => state.rotors.rotors;
-export const selectActiveRotorsKeysState = (state: AppState) => state.rotors.activeRotorsKeys;
+export const selectActiveRotorsKeysState = (state: AppState) =>
+  state.rotors.activeRotorsKeys;

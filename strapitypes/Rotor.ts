@@ -1,3 +1,5 @@
+/** @format */
+
 import { IRotorRotorPieceType_2 } from "./rotor/RotorPieceType_2";
 import { IRotorRotorPiece } from "./rotor/RotorPiece";
 import { ExtractNested } from "./builtins/ExtractNested";
